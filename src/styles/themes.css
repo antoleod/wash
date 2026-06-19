@@ -1,0 +1,95 @@
+/* ============================================================
+   THEMES — La Lavadora de Datos
+   Minimal, neutral palette · single blue accent · soft borders.
+   PII / PCI / token keep their functional risk colors.
+   ============================================================ */
+
+/* ---- Light theme (default) ---- */
+[data-theme="light"] {
+    --bg-app:               #fafafa;
+    --bg-surface:           #ffffff;
+    --bg-surface-alt:       #f4f4f5;
+    --bg-controls:          #ececee;
+    --bg-info:              #f4f4f5;
+    --bg-input:             #ffffff;
+
+    --color-primary:        #2563eb;
+    --color-primary-dark:   #1d4ed8;
+    --bg-header:            #ffffff;
+    --color-accent:         #2563eb;
+    --color-danger:         #dc2626;
+    --color-success:        #16a34a;
+    --color-warning:        #d97706;
+    --color-muted:          #a1a1aa;
+
+    --color-text:           #18181b;
+    --color-text-secondary: #52525b;
+    --color-text-muted:     #6b7280;   /* WCAG AA: ~4.6:1 on #fff (was #9ca3af, 2.5:1) */
+    --color-heading:        #18181b;
+
+    --color-border:         #e4e4e7;
+    --color-border-focus:   #2563eb;
+
+    --pii-bg:               #fef2f2;
+    --pii-text:             #b91c1c;
+    --pii-border:           #fca5a5;
+    --pci-bg:               #fffbeb;
+    --pci-text:             #b45309;
+    --pci-border:           #fcd34d;
+
+    --shadow-xs:  0 1px 2px  rgba(0,0,0,.04);
+    --shadow-sm:  0 1px 2px  rgba(0,0,0,.05);
+    --shadow-md:  0 1px 3px  rgba(0,0,0,.07);
+    --shadow-lg:  0 6px 24px rgba(0,0,0,.09);
+
+    --radius-sm:  5px;
+    --radius-md:  8px;
+    --radius-lg:  12px;
+
+    --transition: 0.2s ease;
+}
+
+/* ---- Dark theme ---- */
+[data-theme="dark"] {
+    --bg-app:               #0a0a0b;
+    --bg-surface:           #161618;
+    --bg-surface-alt:       #1d1d20;
+    --bg-controls:          #27272a;
+    --bg-info:              #1d1d20;
+    --bg-input:             #161618;
+
+    --color-primary:        #3b82f6;
+    --color-primary-dark:   #2563eb;
+    --bg-header:            #161618;
+    --color-accent:         #60a5fa;
+    --color-danger:         #ef4444;
+    --color-success:        #22c55e;
+    --color-warning:        #f59e0b;
+    --color-muted:          #52525b;
+
+    --color-text:           #e4e4e7;
+    --color-text-secondary: #a1a1aa;
+    --color-text-muted:     #8a8a94;   /* WCAG AA: ~4.7:1 on #161618 (was #71717a, 3.7:1) */
+    --color-heading:        #fafafa;
+
+    --color-border:         #3f3f46;
+    --color-border-focus:   #3b82f6;
+
+    --pii-bg:               #2d1517;
+    --pii-text:             #fca5a5;
+    --pii-border:           #7f1d1d;
+    --pci-bg:               #2a1f0a;
+    --pci-text:             #fcd34d;
+    --pci-border:           #78350f;
+
+    --shadow-xs:  0 1px 2px  rgba(0,0,0,.30);
+    --shadow-sm:  0 1px 2px  rgba(0,0,0,.40);
+    --shadow-md:  0 1px 3px  rgba(0,0,0,.50);
+    --shadow-lg:  0 6px 24px rgba(0,0,0,.55);
+
+    --radius-sm:  5px;
+    --radius-md:  8px;
+    --radius-lg:  12px;
+
+    --transition: 0.2s ease;
+}

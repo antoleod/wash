@@ -1,0 +1,563 @@
+{
+  "lang": "nl",
+  "langName": "Nederlands",
+  "dir": "ltr",
+  "ui": {
+    "title": "De Datawasser",
+    "subtitle": "DLP-sandbox en Prompt-sanitisatie voor AI",
+    "instructions": "Plak tekst met (fictieve) gevoelige gegevens in het linker paneel. Gebruik <strong>Controleren</strong> om risico's te detecteren en <strong>Opschonen</strong> voor automatische tokenisatie vóór het verzenden naar een AI.",
+    "btn_clear": "Wissen",
+    "btn_audit": "Controleren",
+    "btn_sanitize": "Opschonen",
+    "btn_undo": "Ongedaan maken",
+    "btn_copy": "Kopiëren",
+    "btn_copy_prompt": "Prompt kopiëren",
+    "btn_copy_full": "Alles kopiëren",
+    "btn_export": "Exporteren",
+    "btn_import": "Importeren",
+    "panel_input": "Invoer",
+    "panel_input_subtitle": "(Onveilige Prompt)",
+    "panel_output": "Uitvoer",
+    "panel_output_subtitle": "(Veilige Prompt)",
+    "placeholder_input": "Bijv.: Hallo, ik moet de verkopen van Jan de Vries analyseren, BSN 123456789, kaart 4500-1234-5678-9010, telefoon +31 6 12345678...",
+    "result_placeholder": "Wachten op invoer...",
+    "result_processing": "Verwerken...",
+    "result_no_findings": "Geen gevoelige gegevens gedetecteerd in de tekst.",
+    "char_count": "{n} tekens",
+    "stats_title": "Analyseresultaten",
+    "stats_total": "Totaal gedetecteerd",
+    "stats_pii": "PII",
+    "stats_pci": "PCI",
+    "stats_risk": "Risiconiveau",
+    "risk_none": "—",
+    "risk_low": "LAAG",
+    "risk_medium": "GEMIDDELD",
+    "risk_high": "HOOG",
+    "legend_pii": "Persoonlijk",
+    "legend_pci": "Financieel",
+    "legend_token": "Token",
+    "history_title": "Recente gesprekken",
+    "history_clear": "Gesprekken wissen",
+    "history_empty": "Nog geen opgeschoonde gesprekken.",
+    "history_restore_hint": "Klik om dit opgeschoonde gesprek te herstellen",
+    "patterns_title": "Detectiepatronen",
+    "patterns_desc": "Schakel patronen in of uit, of voeg nieuwe toe. Wijzigingen worden automatisch opgeslagen.",
+    "patterns_add_name": "Naam (bijv.: IBAN)",
+    "patterns_add_regex": "Regex (bijv.: [A-Z]{2}\\d{22})",
+    "patterns_add_btn": "Toevoegen",
+    "patterns_search": "Patroon zoeken...",
+    "patterns_type_pii": "PII",
+    "patterns_type_pci": "PCI",
+    "pattern_remove_tip": "Patroon verwijderen",
+    "pattern_builtin_tip": "Ingebouwd patroon (kan niet worden verwijderd)",
+    "shortcuts_title": "Sneltoetsen",
+    "shortcut_sanitize": "Tekst opschonen",
+    "shortcut_audit": "Risico's controleren",
+    "shortcut_clear": "Alles wissen",
+    "shortcut_undo": "Ongedaan maken",
+    "shortcut_theme": "Thema wisselen (licht/donker)",
+    "shortcut_copy": "Resultaat kopiëren",
+    "shortcut_export": "Resultaat exporteren",
+    "shortcut_close": "Venster sluiten",
+    "drop_hint": "Sleep bestand hier",
+    "toast_no_input": "Voer eerst tekst in het invoerpaneel in.",
+    "toast_no_findings": "Geen gevoelige gegevens gevonden. ✓",
+    "toast_findings": "{n} gevoelig item{s} gedetecteerd.",
+    "toast_sanitized": "{n} item{s} getokeniseerd. Prompt is nu veilig.",
+    "toast_no_replace": "Geen gevoelige gegevens. Tekst is al schoon. ✓",
+    "toast_cleared": "Alles gewist.",
+    "toast_undo": "Actie ongedaan gemaakt.",
+    "toast_copied": "Resultaat gekopieerd naar klembord.",
+    "toast_copy_fail": "Kopiëren mislukt. Selecteer de tekst handmatig.",
+    "toast_exported": "Geëxporteerd als {filename}",
+    "toast_imported": "Bestand \"{name}\" geladen.",
+    "toast_import_error": "Fout bij het lezen van het bestand.",
+    "toast_import_type": "Bestandstype niet ondersteund. Gebruik .txt, .md of .csv",
+    "toast_pattern_added": "Patroon \"{name}\" toegevoegd.",
+    "toast_pattern_removed": "Patroon \"{name}\" verwijderd.",
+    "toast_pattern_on": "Patroon \"{name}\" ingeschakeld.",
+    "toast_pattern_off": "Patroon \"{name}\" uitgeschakeld.",
+    "toast_history_cleared": "Opgeschoonde gesprekken gewist.",
+    "toast_theme_dark": "Donker thema ingeschakeld.",
+    "toast_theme_light": "Licht thema ingeschakeld.",
+    "toast_lang_changed": "Taal gewijzigd naar Nederlands.",
+    "error_pattern_name_empty": "Naam mag niet leeg zijn.",
+    "error_pattern_duplicate": "Er bestaat al een patroon met de naam \"{name}\".",
+    "history_action_audit": "CONTROLE",
+    "history_action_sanitize": "OPSCHONEN",
+    "history_desc_audit": "Controle: {n} vinding(en) — {level} risico",
+    "history_desc_sanitize": "Opgeschoond: {n} vervanging(en)",
+    "group_global": "Universeel",
+    "group_personal": "Persoonsgegevens (lexicon)",
+    "group_financial": "Financieel",
+    "group_tech": "Technologie",
+    "group_es": "Spanje",
+    "group_us": "Verenigde Staten",
+    "group_nl": "Nederland",
+    "group_fr": "Frankrijk",
+    "group_uk": "Verenigd Koninkrijk",
+    "group_mx": "Mexico",
+    "footer_course": "Lesmateriaal van de cursus \"Cybersecurity in Generatieve AI: Risicobeheer en Controle\" — Uitsluitend voor educatief gebruik.",
+    "footer_instructor": "Instructeur",
+    "btn_paste": "Plakken",
+    "toast_pasted": "Tekst geplakt vanaf het klembord.",
+    "toast_paste_empty": "Het klembord is leeg.",
+    "toast_paste_fail": "Kon het klembord niet lezen. Plak handmatig met Ctrl+V.",
+    "toast_paste_unsupported": "Je browser staat plakken hier niet toe. Gebruik Ctrl+V.",
+    "nav_title": "Gevoelige gegevens",
+    "nav_prev": "Vorig item",
+    "nav_next": "Volgend item",
+    "restore_title": "Echte gegevens herstellen",
+    "restore_hint": "Plak het antwoord van je LLM (met de tokens) om de oorspronkelijke waarden te herstellen.",
+    "restore_placeholder": "Plak hier het antwoord van je LLM, bijv. \"Goedemorgen [NOMBRE_1], …\"",
+    "btn_restore": "Herstellen",
+    "btn_copy_safe": "Veilige tekst kopiëren",
+    "restore_step1": "Kopieer de veilige tekst",
+    "restore_step2": "Plak het in je LLM",
+    "restore_step3": "Plak hier het antwoord",
+    "restore_step4": "Herstel de gegevens",
+    "restore_ok": "✓ Hersteld · geen verweesde placeholders",
+    "restore_orphans": "⚠ Hersteld · {n} verweesde placeholder(s): {list}",
+    "restore_invented": "⛔ De LLM bevatte NIET-geanonimiseerde gegevens: {list}",
+    "toast_restored": "Echte gegevens hersteld.",
+    "toast_restore_empty": "Niets te herstellen.",
+    "lang_selector_label": "Taal",
+    "corr_title": "Handmatige correctie",
+    "corr_value": "Gevoelige waarde",
+    "corr_suggestion": "Mogelijke uitbreiding gedetecteerd",
+    "corr_accept": "Accepteren",
+    "corr_reject": "Afwijzen",
+    "corr_action": "Actie",
+    "corr_action_create": "Markeren / token maken",
+    "corr_action_extend": "Token uitbreiden",
+    "corr_action_replace": "Type vervangen",
+    "corr_action_ignore": "Selectie negeren",
+    "corr_type": "Gegevenstype",
+    "corr_custom": "Aangepast token (optioneel)",
+    "corr_before": "Voor",
+    "corr_after": "Na",
+    "corr_learn": "Onthouden als lokale regel (leren)",
+    "corr_cancel": "Annuleren",
+    "corr_apply": "Toepassen",
+    "corr_undo": "Correctie ongedaan maken",
+    "tokenmap_title": "Tokenkaart",
+    "tokenmap_privacy": "🔒 Alles wordt lokaal in je browser verwerkt. Geen gevoelige waarde verlaat je apparaat.",
+    "tm_token": "Token",
+    "tm_type": "Type",
+    "tm_value": "Oorspronkelijke waarde",
+    "tm_risk": "Risico",
+    "tm_confidence": "Betrouwbaarheid",
+    "tm_actions": "Acties",
+    "audit_log_title": "Correctie-audit",
+    "export_clean": "Schone prompt",
+    "export_map": "Kaart JSON",
+    "export_audit_csv": "Audit CSV",
+    "export_audit_json": "Audit JSON",
+    "export_rules": "Regels JSON",
+    "export_memory": "Geheugen JSON",
+    "export_protected": "Beschermd JSON",
+    "corr_reuse_pre": "Bestaat al als",
+    "corr_reuse_btn": "Hergebruiken",
+    "corr_quick_apply": "Voorstel toepassen",
+    "corr_quick_protect": "Zo houden",
+    "corr_quick_ignore": "Negeren",
+    "corr_action_protect": "Zo houden",
+    "corr_advanced": "Geavanceerde opties",
+    "corr_guess_pre": "Lijkt op",
+    "corr_type_new": "Nieuw type…",
+    "report_more": "Audit en details bekijken",
+    "pack_label": "Regelpakket (geen persoonsgegevens):",
+    "pack_export": "Pakket exporteren",
+    "pack_import": "Pakket importeren",
+    "memory_title": "Tijdelijk geheugen",
+    "memory_remember": "Onthouden voor volgende sessies",
+    "memory_hint": "Je sessiebeslissingen: vrije tokens, beschermde en genegeerde zinnen. Niets wordt zonder jouw controle toegepast.",
+    "mem_type": "Type",
+    "mem_name": "Naam",
+    "mem_value": "Waarde",
+    "mem_action": "Actie",
+    "mem_state": "Status",
+    "mem_actions": "Acties",
+    "header_subtitle": "Slimme anonimisering van gevoelige gegevens",
+    "help": "Help",
+    "nav_section": "Navigatie",
+    "nav_sanitizer": "Sanitizer",
+    "nav_audit": "Audit",
+    "nav_tokens": "Tokens",
+    "nav_history": "Geschiedenis",
+    "nav_config": "Configuratie",
+    "conf_title": "Betrouwbaarheidsscore",
+    "conf_desc": "Gemiddelde detectienauwkeurigheid voor deze tekst.",
+    "info_title": "Hoe werkt anonimisering?",
+    "info_body": "Elk gevoelig gegeven wordt vervangen door een omkeerbaar token (bijv. [PERSOON_1]). De schone tekst kan naar een AI worden gestuurd zonder echte informatie prijs te geven; daarna kun je de oorspronkelijke waarden lokaal herstellen.",
+    "success_badge": "Succesvol geanonimiseerd",
+    "patterns_custom_group": "Aangepast",
+    "conf_empty": "—",
+    "action_edit": "Bewerken",
+    "action_replace": "Vervangen",
+    "action_delete": "Verwijderen",
+    "action_generalize": "Generaliseren",
+    "action_generalize_tip": "Het formaat leren als herbruikbaar patroon",
+    "action_activate": "Activeren",
+    "action_deactivate": "Deactiveren",
+    "action_permanent": "Permanent",
+    "tm_empty": "Nog geen tokens. Anonimiseer tekst of markeer gegevens handmatig.",
+    "mem_tipo_protect": "BESCHERMDE ZIN",
+    "mem_tipo_ignore": "GENEGEERD",
+    "mem_tipo_free": "VRIJ TOKEN",
+    "mem_tipo_token": "TOKEN",
+    "mem_accion_protect": "Houd zoals het is",
+    "mem_accion_ignore": "Niet analyseren",
+    "mem_accion_replace": "Vervangen",
+    "mem_state_active": "Actief",
+    "mem_state_inactive": "Uitgeschakeld",
+    "mem_perm": "Permanent",
+    "mem_temp": "Tijdelijk",
+    "mem_no_token": "Geen token",
+    "corr_verb_create": "Token aangemaakt",
+    "corr_verb_extend": "Token uitgebreid",
+    "corr_verb_replace": "Type vervangen",
+    "corr_verb_protect": "Zin beschermd (zoals het is)",
+    "corr_verb_ignore": "Selectie genegeerd",
+    "corr_verb_default": "Correctie toegepast",
+    "corr_undone": "Correctie ongedaan gemaakt",
+    "audit_act_create": "Token aanmaken",
+    "audit_act_extend": "Token uitbreiden",
+    "audit_act_replace": "Type vervangen",
+    "audit_act_protect": "Zin beschermd",
+    "audit_act_ignore": "Selectie genegeerd",
+    "audit_act_delete": "Token verwijderen",
+    "audit_act_default": "Handmatige correctie",
+    "audit_act_undo": "Correctie ongedaan maken",
+    "toast_value_not_found": "Die tekst komt niet voor in de Vuile Prompt.",
+    "toast_select_value": "Selecteer een waarde.",
+    "toast_generalize_only_tokens": "Alleen tokens kunnen worden gegeneraliseerd (geen beschermde/genegeerde zinnen).",
+    "toast_generalize_too_variable": "Die waarde is te variabel om te generaliseren.",
+    "toast_pattern_exists": "Dat patroon bestaat al.",
+    "toast_entry_deleted": "Vermelding verwijderd",
+    "toast_saved_future": "Opgeslagen voor volgende sessies",
+    "toast_rule_permanent": "Omgezet in een permanente regel",
+    "toast_token_deleted": "Token verwijderd",
+    "toast_enabled": "Ingeschakeld",
+    "toast_disabled": "Uitgeschakeld",
+    "toast_remember_on": "Ik onthoud je keuzes",
+    "toast_remember_off": "Alleen voor deze sessie",
+    "toast_learned_format": "Formaat geleerd: /{regex}/ → [{base}]. Bekijk het in Patronen.",
+    "toast_export_clean": "Schone prompt geëxporteerd",
+    "toast_no_tokens_export": "Geen tokens om te exporteren.",
+    "toast_export_map": "Tokenkaart geëxporteerd",
+    "toast_audit_empty": "Audit is leeg.",
+    "toast_export_audit_csv": "Audit-CSV geëxporteerd",
+    "toast_export_audit_json": "Audit-JSON geëxporteerd",
+    "toast_no_rules": "Geen geleerde regels.",
+    "toast_export_rules": "Regels geëxporteerd",
+    "toast_memory_empty": "Tijdelijk geheugen is leeg.",
+    "toast_export_memory": "Tijdelijk geheugen geëxporteerd",
+    "toast_no_protected": "Geen beschermde zinnen.",
+    "toast_export_protected": "Beschermde zinnen geëxporteerd",
+    "toast_no_custom_patterns": "Geen aangepaste patronen om te delen.",
+    "toast_pack_invalid": "Kon het pakket niet lezen (ongeldige JSON).",
+    "toast_pack_imported": "Pakket geïmporteerd: {added} toegevoegd, {skipped} overgeslagen.",
+    "toast_pack_exported": "Pakket geëxporteerd ({n} patronen, geen persoonsgegevens)."
+  },
+  "patterns": {
+    "email": {
+      "name": "E-mail",
+      "label": "E-mailadres gedetecteerd"
+    },
+    "phone_es": {
+      "name": "Telefoon ES",
+      "label": "Spaans telefoonnummer"
+    },
+    "phone_intl": {
+      "name": "Internationaal Telefoon",
+      "label": "Internationaal telefoonnummer"
+    },
+    "ip": {
+      "name": "IPv4-adres",
+      "label": "IP-adres (v4)"
+    },
+    "ipv6": {
+      "name": "IPv6-adres",
+      "label": "IP-adres (v6)"
+    },
+    "mac": {
+      "name": "MAC-adres",
+      "label": "Netwerk MAC-adres"
+    },
+    "gps_coords": {
+      "name": "GPS-coördinaten",
+      "label": "Geolocatiecoördinaten"
+    },
+    "dob": {
+      "name": "Geboortedatum",
+      "label": "Geboortedatum in tekst"
+    },
+    "passport": {
+      "name": "Paspoort",
+      "label": "Paspoortnummer"
+    },
+    "jwt": {
+      "name": "JWT-token",
+      "label": "JSON Web Token"
+    },
+    "api_key": {
+      "name": "API-sleutel / Token",
+      "label": "API-sleutel of toegangstoken"
+    },
+    "password_text": {
+      "name": "Wachtwoord in tekst",
+      "label": "Wachtwoord in leesbare tekst"
+    },
+    "creditCard": {
+      "name": "Creditcard",
+      "label": "Creditcardnummer (PCI)"
+    },
+    "cvv": {
+      "name": "CVV / CVC",
+      "label": "Beveiligingscode kaart"
+    },
+    "card_expiry": {
+      "name": "Kaartvervaldatum",
+      "label": "Vervaldatum creditcard"
+    },
+    "iban": {
+      "name": "IBAN",
+      "label": "Bankrekening IBAN"
+    },
+    "bic": {
+      "name": "BIC / SWIFT",
+      "label": "BIC/SWIFT bankcode"
+    },
+    "bitcoin": {
+      "name": "Bitcoin-wallet",
+      "label": "Bitcoin-adres"
+    },
+    "ethereum": {
+      "name": "Ethereum-wallet",
+      "label": "Ethereum-adres"
+    },
+    "dni": {
+      "name": "DNI (Spanje)",
+      "label": "Spaans nationaal ID"
+    },
+    "nie": {
+      "name": "NIE (Spanje)",
+      "label": "Buitenlander-ID Spanje"
+    },
+    "nif_empresa": {
+      "name": "NIF Bedrijf (Spanje)",
+      "label": "Spaans bedrijfs-BTW-nummer"
+    },
+    "ss_es": {
+      "name": "Sociale Zekerheid (ES)",
+      "label": "Spaans SZ-nummer"
+    },
+    "licencePlate_es": {
+      "name": "Kentekenplaat ES",
+      "label": "Spaans kenteken"
+    },
+    "names_es": {
+      "name": "Spaanse Namen",
+      "label": "Spaanse voornaam gevonden"
+    },
+    "ssn": {
+      "name": "SSN (VS)",
+      "label": "Amerikaans SZ-nummer"
+    },
+    "ein": {
+      "name": "EIN (VS)",
+      "label": "Werkgevers-ID VS"
+    },
+    "zip_us": {
+      "name": "ZIP-code (VS)",
+      "label": "Amerikaanse postcode"
+    },
+    "bsn": {
+      "name": "BSN (Nederland)",
+      "label": "Burgerservicenummer"
+    },
+    "names_nl": {
+      "name": "Nederlandse Namen",
+      "label": "Nederlandse voornaam gevonden"
+    },
+    "insee": {
+      "name": "NIR/INSEE (Frankrijk)",
+      "label": "Frans SZ-nummer"
+    },
+    "siret": {
+      "name": "SIRET (Frankrijk)",
+      "label": "Frans bedrijfsnummer"
+    },
+    "names_fr": {
+      "name": "Franse Namen",
+      "label": "Franse voornaam gevonden"
+    },
+    "nino": {
+      "name": "NINO (VK)",
+      "label": "Nationaal Verzekeringsnummer VK"
+    },
+    "nhs": {
+      "name": "NHS-nummer (VK)",
+      "label": "NHS-nummer VK"
+    },
+    "uk_postcode": {
+      "name": "Postcode (VK)",
+      "label": "Britse postcode"
+    },
+    "curp": {
+      "name": "CURP (Mexico)",
+      "label": "Mexicaanse CURP"
+    },
+    "rfc": {
+      "name": "RFC (Mexico)",
+      "label": "Mexicaans RFC"
+    },
+    "aws_access_key": {
+      "name": "AWS-toegangssleutel",
+      "label": "AWS-toegangssleutel"
+    },
+    "github_token": {
+      "name": "GitHub-token",
+      "label": "GitHub-toegangstoken"
+    },
+    "google_api_key": {
+      "name": "Google API-sleutel",
+      "label": "Google API-sleutel"
+    },
+    "stripe_key": {
+      "name": "Stripe API-sleutel",
+      "label": "Stripe API-sleutel"
+    },
+    "slack_token": {
+      "name": "Slack-token",
+      "label": "Slack-toegangstoken"
+    },
+    "openai_key": {
+      "name": "OpenAI API-sleutel",
+      "label": "OpenAI API-sleutel"
+    },
+    "sendgrid_key": {
+      "name": "SendGrid API-sleutel",
+      "label": "SendGrid API-sleutel"
+    },
+    "gitlab_token": {
+      "name": "GitLab-token",
+      "label": "GitLab persoonlijk toegangstoken"
+    },
+    "npm_token": {
+      "name": "npm-token",
+      "label": "npm-toegangstoken"
+    },
+    "twilio_sid": {
+      "name": "Twilio Account SID",
+      "label": "Twilio account-identificatie"
+    },
+    "mailgun_key": {
+      "name": "Mailgun API-sleutel",
+      "label": "Mailgun API-sleutel"
+    },
+    "private_key_pem": {
+      "name": "Privésleutel (PEM)",
+      "label": "PEM-privésleutelblok (RSA/EC/serviceaccount)"
+    },
+    "secret_entropy": {
+      "name": "Geheim (entropie)",
+      "label": "Tekenreeks met hoge entropie (mogelijk sleutel/geheim)"
+    },
+    "address_fr_context": {
+      "name": "Adres FR/BE",
+      "label": "Frans of Belgisch postadres"
+    },
+    "postal_code_be": {
+      "name": "Postcode BE",
+      "label": "Belgische postcode met plaats"
+    },
+    "rrn_be": {
+      "name": "Rijksregisternummer (BE)",
+      "label": "Belgisch Rijksregisternummer"
+    },
+    "address_nl_context": {
+      "name": "Adres NL",
+      "label": "Nederlands postadres"
+    },
+    "postal_code_nl": {
+      "name": "Postcode NL",
+      "label": "Nederlandse postcode (1234 AB) met plaats"
+    },
+    "address_en_context": {
+      "name": "Adres EN",
+      "label": "Engels postadres (nummer + straat)"
+    },
+    "names_en": {
+      "name": "Namen EN",
+      "label": "Engelse persoonsnaam"
+    },
+    "nationality_intl_context": {
+      "name": "Nationaliteit (meertalig)",
+      "label": "Nationaliteit via label (fr/nl/en)"
+    },
+    "cities_eu": {
+      "name": "EU-steden (lexicon)",
+      "label": "Europese stad (fr/nl/en) via woordenboek"
+    },
+    "countries_intl": {
+      "name": "Landen (meertalig lexicon)",
+      "label": "Land in oorspronkelijke spelling via woordenboek"
+    },
+    "phone_be_national": {
+      "name": "Belgische telefoon op context",
+      "label": "Belgisch telefoonnummer met label"
+    },
+    "address_be_street_context": {
+      "name": "BE/NL/EN-adres op label",
+      "label": "Postadres met label"
+    },
+    "greeting_name_context": {
+      "name": "Naam na begroeting",
+      "label": "Persoonsnaam gedetecteerd na een begroeting"
+    }
+  },
+  "tokenLabels": {
+    "NOMBRE": "Voornaam",
+    "APELLIDO": "Achternaam",
+    "NOMBRE_COMPLETO": "Volledige naam",
+    "PERSONA_ES": "Persoon (ES)",
+    "PERSONA_FR": "Persoon (FR)",
+    "PERSONNE_FR": "Persoon (FR)",
+    "PERSOON_NL": "Persoon (NL)",
+    "PERSON_EN": "Persoon (EN)",
+    "DNI": "Nationaal ID",
+    "DNI_ES": "Spaans ID",
+    "NIE": "NIE",
+    "NIE_ES": "NIE",
+    "PASAPORTE": "Paspoort",
+    "SSN_USA": "SSN (VS)",
+    "RRN_BE": "Rijksregisternummer (BE)",
+    "FECHA_NACIMIENTO": "Geboortedatum",
+    "EDAD": "Leeftijd",
+    "SEXO": "Geslacht / gender",
+    "DIRECCION": "Adres",
+    "CODIGO_POSTAL": "Postcode",
+    "CIUDAD": "Stad",
+    "PROVINCIA": "Provincie / regio",
+    "PAIS": "Land",
+    "TELEFONO": "Telefoon",
+    "TELEFONO_INTL": "Telefoon",
+    "EMAIL": "E-mail",
+    "ESTADO_CIVIL": "Burgerlijke staat",
+    "PROFESION": "Beroep",
+    "NACIONALIDAD": "Nationaliteit",
+    "EMPRESA": "Bedrijf",
+    "USUARIO": "Gebruiker / login",
+    "MATRICULA": "Kenteken",
+    "EXPEDIENTE": "Dossier",
+    "IBAN": "IBAN / bankrekening",
+    "BIC_SWIFT": "BIC / SWIFT",
+    "CUENTA": "Bankrekening",
+    "TARJETA_CREDITO": "Betaalkaart",
+    "OTRO": "Overig",
+    "RIESGO_MANUAL": "Handmatig risico",
+    "RIESGO_POSIBLE": "Mogelijk risico"
+  }
+}

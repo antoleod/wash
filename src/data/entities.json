@@ -1,0 +1,448 @@
+{
+  "given_names": {
+    "es": [
+      "Juan", "María", "Pedro", "Ana", "Luis", "Carlos", "Elena", "Sofía",
+      "David", "Isabel", "Miguel", "Carmen", "Antonio", "Lucía", "Pablo",
+      "Laura", "Javier", "Marta", "Sergio", "Cristina", "Alejandro", "Pilar",
+      "Fernando", "Rosa", "Álvaro", "Beatriz", "Guillermo", "Silvia", "Mario",
+      "Nuria", "Rafael", "Teresa", "Ángel", "Patricia", "Enrique", "Sandra",
+      "Manuel", "Verónica", "Raúl", "Jorge", "Andrés", "Diego", "Adrián",
+      "Daniel", "Óscar", "Iván", "Rubén", "Irene", "Claudia", "Roberto",
+      "Natalia", "Héctor", "Esther", "Víctor", "Rebeca", "Eduardo", "Lorena",
+      "Ramón", "Inés", "Emilio", "Amparo", "Felipe", "Rocío", "César", "Gloria",
+      "Arturo", "Paco", "Concha", "Lola", "Pepe", "Maite", "Iker", "Amaia",
+      "Ainhoa", "Gorka", "Unai", "Ane", "Mikel", "Leire", "Josu", "Itziar",
+      "Xavier", "Montserrat", "Jordi", "Núria", "Oriol", "Laia", "Marc",
+      "Alba", "Arnau", "Ariadna", "Pau", "Júlia", "Joan", "Mireia", "Carles",
+      "Gemma", "Quim", "Meritxell", "Ferran", "Blanca", "Salvador", "Dolores",
+      "Tomás", "Mercedes", "Eugenio", "Consuelo", "Ignacio", "Concepción",
+      "Gonzalo", "Alicia", "Martín", "Berta", "Agustín", "Esperanza",
+      "Rodrigo", "Margarita", "Nicolás", "Valentina", "Bruno", "Regina",
+      "Hugo", "Daniela", "Mateo", "Emma", "Lucas", "Valentina", "Liam",
+      "Camila", "Sebastián", "Valeria", "Santiago", "Isabella", "Emilio",
+      "Renata", "Ignacio", "Florencia", "Esteban", "Viviana", "Facundo"
+    ],
+    "fr": [
+      "Jean", "Pierre", "Michel", "André", "Philippe", "Marie", "Isabelle",
+      "Nathalie", "Catherine", "Sophie", "Nicolas", "Patrick", "François",
+      "Christophe", "Laurent", "Éric", "Alain", "Sylvie", "Martine", "Monique",
+      "Julien", "Thomas", "Camille", "Léa", "Manon", "Hugo", "Lucas", "Louis",
+      "Emma", "Chloé", "Antoine", "Mathieu", "Olivier", "Céline", "Sandrine",
+      "Aurélie", "Sébastien", "Guillaume", "Ludo", "Ludovic", "Élodie",
+      "Virginie", "Stéphane", "Frédéric", "Valérie", "Véronique", "Thierry",
+      "Didier", "Laure", "Hélène", "Noémie", "Zoé", "Maxime", "Alexandre",
+      "Arthur", "Quentin", "Romain", "Théo", "Baptiste", "Pauline", "Amélie",
+      "Julie", "Benoît", "Clément", "Victor", "Alexis", "Florian", "Léo",
+      "Gabin", "Tom", "Enzo", "Evan", "Matteo", "Nathan", "Noah", "Ethan",
+      "Lila", "Lucie", "Inès", "Sarah", "Jade", "Lola", "Lilou", "Clara",
+      "Eva", "Lou", "Charlotte", "Alice", "Margot", "Louise", "Océane",
+      "Jeanne", "Elisa", "Anaïs", "Laetitia", "Sabine", "Odile", "Brigitte",
+      "Colette", "Denise", "Geneviève", "Madeleine", "Michèle", "Renée",
+      "Simone", "Yvette", "Gilbert", "Bernard", "Claude", "Francis", "Gérard",
+      "Henri", "Hervé", "Jacques", "Marcel", "Maurice", "Raymond", "René"
+    ],
+    "nl": [
+      "Jan", "Pieter", "Willem", "Anna", "Maria", "Johan", "Hendrik", "Cornelis",
+      "Gerrit", "Johanna", "Elisabeth", "Petrus", "Jacobus", "Lisa", "Daan",
+      "Sem", "Noah", "Sven", "Bram", "Niels", "Joost", "Lieke", "Femke",
+      "Bas", "Tom", "Klaas", "Lars", "Ruben", "Wouter", "Maarten", "Martijn",
+      "Stefan", "Dirk", "Frank", "Rik", "Tim", "Piet", "Rob", "Hans",
+      "Inge", "Monique", "Sandra", "Marloes", "Nathalie", "Roos", "Hanna",
+      "Fleur", "Iris", "Vera", "Kim", "Noor", "Floor", "Bo", "Lot",
+      "Jeroen", "Kevin", "Milan", "Stijn", "Luuk", "Thijs", "Jesse",
+      "Hidde", "Finn", "Luca", "Mats", "Cas", "Wout", "Jens", "Tijs",
+      "Sofie", "Fien", "Tine", "Leen", "Els", "Lies", "An", "Hilde",
+      "Katrien", "Griet", "Heidi", "Sigrid", "Astrid", "Elke", "Nele",
+      "Lore", "Sara", "Julie", "Laura", "Sarah", "Emma", "Hailey",
+      "Adriaan", "Arnold", "Bert", "Cees", "Eduard", "Erik", "Geert",
+      "Gerard", "Hugo", "Jaap", "Joop", "Karel", "Leon", "Luc", "Mark",
+      "Michiel", "Nico", "Paul", "Peter", "Rene", "Rick", "Simon", "Theo",
+      "Vincent", "Walter", "Wim", "Arjan", "Barend", "Bjorn", "Chris"
+    ],
+    "en": [
+      "James", "John", "Robert", "Michael", "William", "David", "Richard",
+      "Joseph", "Charles", "Mary", "Patricia", "Jennifer", "Linda", "Elizabeth",
+      "Barbara", "Susan", "Jessica", "Sarah", "Karen", "Emma", "Oliver",
+      "Harry", "George", "Jack", "Thomas", "Christopher", "Daniel", "Matthew",
+      "Andrew", "Joshua", "Ryan", "Kevin", "Brian", "Edward", "Mark",
+      "Dorothy", "Lisa", "Nancy", "Betty", "Margaret", "Sandra", "Ashley",
+      "Emily", "Hannah", "Samantha", "Rachel", "Amanda", "Stephanie", "Lauren",
+      "Charlotte", "Sophia", "Amelia", "Isabella", "Mia", "Evelyn", "Harper",
+      "Abigail", "Ella", "Scarlett", "Camila", "Aria", "Layla", "Nora",
+      "Liam", "Noah", "Aiden", "Lucas", "Mason", "Ethan", "Logan", "Jackson",
+      "Sebastian", "Owen", "Elijah", "Connor", "Alexander", "Zachary", "Dylan",
+      "Benjamin", "Nathan", "Ian", "Jake", "Tyler", "Cameron", "Luke",
+      "Aaron", "Adam", "Alan", "Anthony", "Arthur", "Austin", "Blake",
+      "Bradley", "Brendan", "Brett", "Bryan", "Caleb", "Chad", "Chase",
+      "Cody", "Colin", "Corey", "Craig", "Curtis", "Dean", "Derek",
+      "Douglas", "Drew", "Dustin", "Evan", "Gavin", "Grant", "Gregory",
+      "Hunter", "Jacob", "Jason", "Jeffrey", "Jeremy", "Jordan", "Justin",
+      "Keith", "Kenneth", "Kyle", "Lance", "Marcus", "Martin", "Mitchell"
+    ],
+    "ar_be_fr_nl": [
+      "Mohammed", "Mohamed", "Ahmad", "Ahmed", "Karim", "Youssef", "Yousef",
+      "Omar", "Ali", "Hassan", "Hamza", "Ibrahim", "Ismail", "Khalid",
+      "Bilal", "Amine", "Mehdi", "Rayan", "Anas", "Ilyas", "Tariq",
+      "Hicham", "Sofiane", "Zakaria", "Nabil", "Rachid", "Samir", "Aziz",
+      "Farid", "Mourad", "Walid", "Adil", "Nawfal", "Sami", "Malek",
+      "Fares", "Nassim", "Ryad", "Jamal", "Yassine", "Ayoub", "Anass",
+      "Othmane", "Abdelkader", "Abdellah", "Abderrahim", "Abderrazak",
+      "Fatima", "Aicha", "Aisha", "Amina", "Nadia", "Sara", "Soraya",
+      "Hafsa", "Maryam", "Laila", "Rania", "Imane", "Malika", "Samira",
+      "Zineb", "Houda", "Meriem", "Fadila", "Khadija", "Nassima", "Assia",
+      "Sabrina", "Leila", "Yamina", "Souad", "Nora", "Siham", "Widad",
+      "Mehmet", "Ahmet", "Mustafa", "Hüseyin", "Murat", "Ömer", "Serkan",
+      "Fatih", "Kemal", "Bülent", "Yusuf", "Emre", "Burak", "Selim",
+      "Tarkan", "Fatma", "Ayşe", "Emine", "Hatice", "Zeynep", "Elif",
+      "Esra", "Merve", "Selin", "Büşra", "Gül", "Nilüfer", "Dilek"
+    ],
+    "afr_eu": [
+      "Mamadou", "Moussa", "Seydou", "Kofi", "Kwame", "Amadou", "Lamine",
+      "Oumar", "Modou", "Abdou", "Cheikh", "Ousmane", "Idrissa", "Ibrahima",
+      "Alassane", "Samba", "Boubacar", "Abdoulaye", "Aladji", "Daouda",
+      "Aminata", "Mariama", "Aïssatou", "Fatoumata", "Kadiatou", "Oumou",
+      "Rokhaya", "Adja", "Ndeye", "Dieynaba", "Khady", "Marème"
+    ],
+    "eu_est": [
+      "Piotr", "Michał", "Paweł", "Tomasz", "Krzysztof", "Adam", "Marek",
+      "Jakub", "Lukasz", "Szymon", "Bogdan", "Artur", "Kamil", "Damian",
+      "Marcin", "Rafał", "Grzegorz", "Bartosz", "Mateusz", "Przemek",
+      "Vasile", "Ioan", "Alexandru", "Mihai", "Andrei", "Florin", "Bogdan",
+      "Vladimir", "Dmitri", "Ivan", "Sergei", "Alexei", "Nicolai", "Viktor",
+      "Katarzyna", "Małgorzata", "Agnieszka", "Barbara", "Zofia", "Monika",
+      "Beata", "Jolanta", "Aleksandra", "Natalia", "Weronika", "Marta",
+      "Elena", "Ioana", "Andreea", "Alina", "Raluca", "Cristina", "Roxana",
+      "Svetlana", "Tatiana", "Olga", "Natasha", "Irina", "Ekaterina"
+    ]
+  },
+
+  "last_names": {
+    "es": [
+      "García", "Martínez", "López", "González", "Rodríguez", "Fernández",
+      "Sánchez", "Pérez", "Gómez", "Díaz", "Moreno", "Álvarez", "Muñoz",
+      "Romero", "Alonso", "Gutiérrez", "Navarro", "Torres", "Domínguez",
+      "Vázquez", "Ramos", "Gil", "Serrano", "Blanco", "Molina", "Morales",
+      "Suárez", "Ortega", "Delgado", "Castro", "Ortiz", "Rubio", "Marín",
+      "Sanz", "Iglesias", "Núñez", "Medina", "Garrido", "Cortés", "Castillo",
+      "Santos", "Lozano", "Guerrero", "Cano", "Prieto", "Méndez", "Cruz",
+      "Calvo", "Flores", "León", "Herrera", "Vega", "Ramírez", "Reyes",
+      "Fuentes", "Jiménez", "Parra", "Cabrera", "Vargas", "Arias", "Campos",
+      "Aguilar", "Santiago", "Carrasco", "Montero", "Hidalgo", "Ibáñez",
+      "Pascual", "Peña", "Ríos", "Pino", "Carrillo", "Benítez", "Herrero",
+      "Durán", "Valdés", "Ferrer", "Mora", "Caballero", "Palacios"
+    ],
+    "fr": [
+      "Martin", "Bernard", "Thomas", "Petit", "Robert", "Richard", "Durand",
+      "Dubois", "Moreau", "Laurent", "Simon", "Michel", "Lefebvre", "Leroy",
+      "Roux", "David", "Bertrand", "Morel", "Fournier", "Girard", "Bonnet",
+      "Dupont", "Lambert", "Fontaine", "Rousseau", "Vincent", "Muller",
+      "Lefevre", "Faure", "Andre", "Mercier", "Blanc", "Guerin", "Boyer",
+      "Garnier", "Chevalier", "Legrand", "Gauthier", "Perrin", "Robin",
+      "Clement", "Morin", "Nicolas", "Henry", "Roussel", "Mathieu", "Gautier",
+      "Masson", "Marchand", "Colin", "Gérard", "Brunet", "Leroux", "Renard",
+      "Meunier", "Meyer", "Perez", "Schmitt", "Leclercq", "Noel", "Rey",
+      "Rolland", "Lucas", "Lacroix", "Blanchard", "Barbier", "Leblanc",
+      "Favier", "Picard", "Brun", "Baron", "Aubert", "Marie", "Caron",
+      "Boulanger", "Michaud", "Fleury", "Benoit", "Reynaud", "Collet"
+    ],
+    "nl": [
+      "De Jong", "Jansen", "De Vries", "Van den Berg", "Van Dijk", "Bakker",
+      "Janssen", "Visser", "Smit", "Meijer", "De Boer", "Mulder", "De Graaf",
+      "Bos", "Hendriks", "Peters", "Van Leeuwen", "Dekker", "Brouwer", "Post",
+      "Dijkstra", "Peeters", "Jacobs", "Vermeer", "Maes", "Willems", "Claes",
+      "Leclercq", "Simon", "Pieters", "Claessens", "Van den Berghe",
+      "De Smedt", "De Meyer", "De Cock", "Van Acker", "Goossens", "Dubois",
+      "Leemans", "Hermans", "Nijs", "Cools", "Mertens", "Wouters", "Lemmens",
+      "Claes", "Van Damme", "Bogaert", "De Wolf", "Stevens", "Vandenberghe",
+      "Verhoeven", "Thijs", "Martens", "Smeets", "Puts", "Raes", "Verbeke",
+      "Van Dyck", "Desmet", "Houben", "Gielen", "Pauwels", "Lemmens"
+    ],
+    "en": [
+      "Smith", "Jones", "Williams", "Brown", "Taylor", "Davies", "Evans",
+      "Wilson", "Thomas", "Roberts", "Johnson", "Lewis", "Walker", "Robinson",
+      "Wood", "Thompson", "White", "Jackson", "Harris", "Martin", "Clarke",
+      "Hall", "Turner", "Moore", "Ward", "Scott", "Watson", "Davis",
+      "Mitchell", "Morgan", "Cooper", "King", "Green", "Baker", "Carter",
+      "Edwards", "Hill", "Phillips", "Campbell", "Parker", "Hughes", "Price",
+      "Anderson", "Wright", "Collins", "Bell", "Stewart", "Young", "Russell",
+      "Allen", "Murphy", "Bailey", "Cox", "Richardson", "Gray", "Ross",
+      "Payne", "Bryant", "Hamilton", "Knight", "Graham", "Patterson", "Cook",
+      "Ferguson", "Reed", "McCarthy", "Butler", "Rogers", "Coleman", "Miles"
+    ]
+  },
+
+  "cities": {
+    "es": [
+      "Madrid", "Barcelona", "Valencia", "Sevilla", "Bilbao", "Málaga",
+      "Zaragoza", "Murcia", "Granada", "Alicante", "Córdoba", "Valladolid",
+      "Vigo", "Gijón", "Hospitalet", "Coruña", "Vitoria", "Oviedo",
+      "Badalona", "Sabadell", "Terrassa", "Mataró", "Girona", "Lleida",
+      "Tarragona", "Manresa", "Reus", "Pamplona", "Logroño", "Santander",
+      "Salamanca", "León", "Burgos", "Palencia", "Zamora", "Ávila", "Segovia",
+      "Soria", "Cuenca", "Guadalajara", "Albacete", "Toledo", "Badajoz",
+      "Cáceres", "Mérida", "Huelva", "Jerez", "Algeciras", "Almería",
+      "Jaén", "Linares", "Elche", "Cartagena", "Murcia", "Lorca",
+      "Alcalá", "Getafe", "Móstoles", "Fuenlabrada", "Leganés", "Alcorcón",
+      "Torrejón", "Alcobendas", "Pozuelo", "Parla", "Irún", "Donostia",
+      "San Sebastián", "Barakaldo", "Getxo", "Santurtzi", "Basauri",
+      "Las Palmas", "Tenerife", "Palma", "Ibiza", "Menorca",
+      "Ceuta", "Melilla", "Pontevedra", "Lugo", "Ourense", "Ferrol",
+      "Santiago", "Castellón", "Gandía", "Torrevieja", "Benidorm",
+      "Marbella", "Fuengirola", "Torremolinos", "Estepona", "Ronda",
+      "Bruselas", "Amberes", "Gante", "Lieja", "Burdeos", "Lyon",
+      "Marsella", "Niza", "Toulouse", "Estrasburgo", "Nantes"
+    ],
+    "be_fr": [
+      "Bruxelles", "Anvers", "Liège", "Gand", "Namur", "Mons", "Louvain",
+      "Charleroi", "Ixelles", "Uccle", "Saint-Gilles", "Anderlecht",
+      "Molenbeek", "Schaerbeek", "Etterbeek", "Jette", "Evere",
+      "Watermael-Boitsfort", "Auderghem", "Woluwe", "Forest", "Koekelberg",
+      "Laeken", "Berchem", "Tournai", "Mouscron", "Verviers", "Seraing",
+      "La Louvière", "Binche", "Soignies", "Nivelles", "Wavre", "Ottignies",
+      "Braine", "Arlon", "Bastogne", "Marche", "Dinant", "Ciney",
+      "Huy", "Herstal", "Beyne-Heusay", "Flémalle", "Lierneux"
+    ],
+    "be_nl": [
+      "Brussel", "Antwerpen", "Gent", "Brugge", "Mechelen", "Sint-Niklaas",
+      "Aalst", "Kortrijk", "Roeselare", "Leuven", "Hasselt", "Genk",
+      "Turnhout", "Beringen", "Heist", "Dendermonde", "Ronse", "Ieper",
+      "Veurne", "Diksmuide", "Tielt", "Wetteren", "Lokeren", "Beveren",
+      "Temse", "Bornem", "Puurs", "Boom", "Willebroek", "Sint-Truiden",
+      "Tongeren", "Lommel", "Maaseik", "Bilzen", "Maasmechelen"
+    ],
+    "fr": [
+      "Paris", "Lyon", "Marseille", "Bordeaux", "Lille", "Nantes", "Toulouse",
+      "Strasbourg", "Nice", "Rennes", "Reims", "Tours", "Dijon", "Angers",
+      "Grenoble", "Montpellier", "Saint-Étienne", "Brest", "Metz", "Rouen",
+      "Toulon", "Amiens", "Limoges", "Clermont-Ferrand", "Besançon",
+      "Orléans", "Le Mans", "Le Havre", "Caen", "Poitiers", "Avignon",
+      "Versailles", "Roubaix", "Tourcoing", "Dunkerque", "Douai",
+      "Perpignan", "Nîmes", "Aix-en-Provence", "Mulhouse", "Boulogne",
+      "Argenteuil", "Montreuil", "Créteil", "Nanterre", "Saint-Denis",
+      "Villeurbanne", "Mérignac", "Pessac", "Caluire", "Vénissieux",
+      "Nancy", "Troyes", "Béthune", "Lens", "Valenciennes", "Thionville",
+      "Colmar", "Saint-Quentin", "Chartres", "Annecy", "Chambéry"
+    ],
+    "nl": [
+      "Amsterdam", "Rotterdam", "Utrecht", "Eindhoven", "Groningen",
+      "Tilburg", "Almere", "Breda", "Nijmegen", "Haarlem", "Arnhem",
+      "Zaanstad", "Amersfoort", "Apeldoorn", "Leiden", "Dordrecht",
+      "Zoetermeer", "Zwolle", "Deventer", "Delft", "Alkmaar", "Helmond",
+      "Venlo", "Lelystad", "Sittard", "Heerlen", "Emmen", "Ede", "Maastricht",
+      "Gouda", "Enschede", "Leeuwarden", "Vlaardingen", "Schiedam",
+      "Spijkenisse", "Capelle", "Bergen", "Heerhugowaard", "Purmerend",
+      "Hoorn", "Enkhuizen", "Medemblik", "Sneek", "Drachten", "Assen",
+      "Meppel", "Coevorden", "Hoogeveen", "Emmen", "Veendam", "Stadskanaal"
+    ],
+    "en": [
+      "London", "Manchester", "Birmingham", "Edinburgh", "Glasgow", "Dublin",
+      "Cardiff", "Belfast", "Liverpool", "Leeds", "Sheffield", "Bristol",
+      "Newcastle", "Nottingham", "Leicester", "Coventry", "Bradford", "York",
+      "Southampton", "Portsmouth", "Reading", "Oxford", "Cambridge", "Bath",
+      "Exeter", "Plymouth", "Derby", "Stoke", "Wolverhampton", "Brighton",
+      "Ipswich", "Norwich", "Lincoln", "Hull", "Middlesbrough", "Sunderland",
+      "Aberdeen", "Dundee", "Inverness", "Perth", "Stirling", "Galway",
+      "Cork", "Limerick", "Waterford", "Kilkenny", "Derry", "Armagh"
+    ],
+    "world": [
+      "Buenos Aires", "Bogotá", "Santiago", "Lima", "México", "Caracas",
+      "Montevideo", "Quito", "Asunción", "La Paz", "Brasilia", "São Paulo",
+      "Rio de Janeiro", "Medellín", "Cali", "Guadalajara", "Monterrey",
+      "Toronto", "Montreal", "Vancouver", "Ottawa", "Calgary", "Quebec",
+      "Sydney", "Melbourne", "Brisbane", "Perth", "Auckland", "Wellington",
+      "Casablanca", "Rabat", "Marrakech", "Tunis", "Argel", "Dakar",
+      "Abidján", "Lagos", "Nairobi", "Johannesburgo", "El Cairo",
+      "Beirut", "Damasco", "Ammán", "Bagdad", "Kuwait", "Dubai",
+      "Abu Dabi", "Riad", "Doha", "Tokio", "Pekín", "Shanghái",
+      "Hong Kong", "Singapur", "Seúl", "Bombay", "Delhi", "Karachi"
+    ]
+  },
+
+  "countries": {
+    "es": [
+      "España", "Francia", "Bélgica", "Italia", "Alemania", "Portugal",
+      "Países Bajos", "Reino Unido", "México", "Suiza", "Austria", "Irlanda",
+      "Grecia", "Polonia", "Rumanía", "Hungría", "Suecia", "Noruega",
+      "Dinamarca", "Finlandia", "Argentina", "Colombia", "Chile", "Perú",
+      "Venezuela", "Ecuador", "Bolivia", "Paraguay", "Uruguay", "Cuba",
+      "República Dominicana", "Guatemala", "Honduras", "El Salvador",
+      "Nicaragua", "Costa Rica", "Panamá", "Marruecos", "Argelia",
+      "Túnez", "Turquía", "Rusia", "Ucrania", "China", "Japón", "India",
+      "Brasil", "Canadá", "Australia", "Sudáfrica", "Nigeria", "Senegal"
+    ],
+    "fr": [
+      "France", "Belgique", "Allemagne", "Pays-Bas", "Royaume-Uni",
+      "Luxembourg", "Suisse", "Autriche", "Irlande", "Italie", "Espagne",
+      "Portugal", "Grèce", "Pologne", "Roumanie", "Hongrie", "Suède",
+      "Maroc", "Algérie", "Tunisie", "Sénégal", "Côte d'Ivoire",
+      "Cameroun", "Mali", "Burkina Faso", "Guinée", "Congo", "Gabon",
+      "Canada", "Haïti", "Mexique", "Brésil", "Argentine", "Chili",
+      "États-Unis", "Australie", "Nouvelle-Zélande", "Turquie", "Russie"
+    ],
+    "nl": [
+      "Nederland", "België", "Duitsland", "Engeland", "Verenigd Koninkrijk",
+      "Luxemburg", "Zwitserland", "Oostenrijk", "Ierland", "Italië",
+      "Spanje", "Portugal", "Griekenland", "Polen", "Roemenië", "Hongarije",
+      "Zweden", "Noorwegen", "Denemarken", "Finland", "Rusland", "Turkije",
+      "Marokko", "Suriname", "Indonesië", "China", "Japan", "India",
+      "Canada", "Australië", "Brazilië", "Argentinië", "Ghana", "Nigeria"
+    ],
+    "en": [
+      "France", "Belgium", "Germany", "Netherlands", "United Kingdom",
+      "Luxembourg", "Switzerland", "Austria", "Ireland", "Italy", "Spain",
+      "Portugal", "Greece", "Poland", "Romania", "Hungary", "Sweden",
+      "Norway", "Denmark", "Finland", "Russia", "Turkey", "Morocco",
+      "United States", "Canada", "Australia", "New Zealand", "Brazil",
+      "Argentina", "Mexico", "China", "Japan", "India", "South Africa",
+      "Nigeria", "Kenya", "Egypt", "Israel", "Saudi Arabia", "Pakistan"
+    ]
+  },
+
+  "months": {
+    "es": [
+      "enero", "febrero", "marzo", "abril", "mayo", "junio",
+      "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+    ],
+    "fr": [
+      "janvier", "février", "mars", "avril", "mai", "juin",
+      "juillet", "août", "septembre", "octobre", "novembre", "décembre"
+    ],
+    "nl": [
+      "januari", "februari", "maart", "april", "mei", "juni",
+      "juli", "augustus", "september", "oktober", "november", "december"
+    ],
+    "en": [
+      "january", "february", "march", "april", "may", "june",
+      "july", "august", "september", "october", "november", "december"
+    ]
+  },
+
+  "honorifics": {
+    "es": ["Sr", "Sra", "Srta", "Dr", "Dra", "Don", "Doña", "Prof", "Lic", "Ing", "Excmo", "Ilmo"],
+    "fr": ["M", "Mme", "Mlle", "Dr", "Pr", "Me", "Mgr", "Rév"],
+    "nl": ["Dhr", "Mevr", "Dr", "Prof", "Ir", "Mr", "Ing"],
+    "en": ["Mr", "Mrs", "Ms", "Miss", "Dr", "Prof", "Rev", "Sir", "Lord", "Lady", "Dame"]
+  },
+
+  "job_titles": {
+    "es": [
+      "médico", "médica", "enfermero", "enfermera", "abogado", "abogada",
+      "ingeniero", "ingeniera", "profesor", "profesora", "maestro", "maestra",
+      "director", "directora", "gerente", "responsable", "coordinador",
+      "coordinadora", "analista", "programador", "programadora", "contable",
+      "administrativo", "administrativa", "secretario", "secretaria",
+      "técnico", "técnica", "auxiliar", "operario", "operaria",
+      "trabajador", "trabajadora", "conductor", "conductora", "fontanero",
+      "electricista", "mecánico", "arquitecto", "arquitecta", "farmacéutico",
+      "farmacéutica", "psicólogo", "psicóloga", "fisioterapeuta", "dentista",
+      "veterinario", "veterinaria", "periodista", "escritor", "escritora",
+      "diseñador", "diseñadora", "comercial", "asesor", "asesora",
+      "consultor", "consultora", "auditora", "auditor", "inspector",
+      "inspectora", "jefe", "jefa", "supervisor", "supervisora",
+      "recepcionista", "camarero", "camarera", "cocinero", "cocinera",
+      "jardinero", "carpintero", "albañil", "pintor", "pintora",
+      "policía", "guardia", "bombero", "militar", "soldado", "piloto",
+      "juez", "jueza", "fiscal", "notario", "notaria", "procurador",
+      "economista", "estadístico", "biólogo", "bióloga", "químico",
+      "química", "físico", "físico", "investigador", "investigadora"
+    ],
+    "fr": [
+      "médecin", "infirmier", "infirmière", "avocat", "avocate",
+      "ingénieur", "ingénieure", "professeur", "instituteur", "institutrice",
+      "directeur", "directrice", "gérant", "gestionnaire", "coordinateur",
+      "coordinatrice", "analyste", "programmeur", "programmeuse", "comptable",
+      "secrétaire", "technicien", "technicienne", "auxiliaire", "ouvrier",
+      "ouvrière", "chauffeur", "plombier", "électricien", "mécanicien",
+      "architecte", "pharmacien", "pharmacienne", "psychologue",
+      "kinésithérapeute", "dentiste", "vétérinaire", "journaliste",
+      "écrivain", "écrivaine", "designer", "commercial", "conseiller",
+      "conseillère", "consultant", "auditeur", "inspecteur", "chef",
+      "responsable", "superviseur", "réceptionniste", "serveur", "serveuse",
+      "cuisinier", "cuisinière", "policier", "pompier", "militaire",
+      "pilote", "juge", "procureur", "notaire", "économiste", "chercheur"
+    ],
+    "nl": [
+      "arts", "verpleegkundige", "advocaat", "ingenieur", "leraar", "lerares",
+      "directeur", "directrice", "manager", "coördinator", "analist",
+      "programmeur", "accountant", "secretaresse", "technicus", "werknemer",
+      "chauffeur", "loodgieter", "elektricien", "monteur", "architect",
+      "apotheker", "psycholoog", "tandarts", "veterinair", "journalist",
+      "ontwerper", "adviseur", "consultant", "auditor", "inspecteur",
+      "chef", "supervisor", "receptionist", "ober", "kelner", "kok",
+      "politieagent", "brandweerman", "militair", "piloot", "rechter",
+      "officier", "notaris", "econoom", "onderzoeker", "wetenschapper"
+    ],
+    "en": [
+      "doctor", "nurse", "lawyer", "attorney", "engineer", "teacher",
+      "professor", "director", "manager", "coordinator", "analyst",
+      "programmer", "accountant", "secretary", "technician", "employee",
+      "driver", "plumber", "electrician", "mechanic", "architect",
+      "pharmacist", "psychologist", "dentist", "veterinarian", "journalist",
+      "writer", "designer", "consultant", "advisor", "auditor", "inspector",
+      "supervisor", "receptionist", "waiter", "cook", "chef", "officer",
+      "soldier", "pilot", "judge", "notary", "economist", "researcher",
+      "scientist", "developer", "administrator", "clerk", "operator",
+      "specialist", "expert", "assistant", "associate", "partner"
+    ]
+  },
+
+  "medical_terms": {
+    "es": [
+      "diabetes", "hipertensión", "asma", "depresión", "ansiedad", "cáncer",
+      "artritis", "osteoporosis", "infarto", "alergia", "epilepsia",
+      "hipotiroidismo", "fibromialgia", "lupus", "esclerosis", "alzheimer",
+      "parkinson", "obesidad", "cirrosis", "hepatitis", "tuberculosis",
+      "VIH", "SIDA", "insuficiencia", "arritmia", "glaucoma", "cataratas",
+      "migraña", "esquizofrenia", "bipolar", "TDAH", "autismo", "diálisis",
+      "quimioterapia", "radioterapia", "insulina", "metformina", "omeprazol",
+      "ibuprofeno", "paracetamol", "amoxicilina", "anticoagulante",
+      "estatina", "ansiolítico", "antidepresivo", "antihipertensivo",
+      "cardiopatía", "nefropatía", "neuropatía", "retinopatía", "psoriasis",
+      "dermatitis", "colitis", "gastritis", "pancreatitis", "apendicitis",
+      "endometriosis", "menopausia", "embarazo", "gestación", "parto",
+      "discapacidad", "minusvalía", "sordera", "ceguera", "autoinmune"
+    ],
+    "fr": [
+      "diabète", "hypertension", "asthme", "dépression", "anxiété", "cancer",
+      "arthrite", "ostéoporose", "infarctus", "allergie", "épilepsie",
+      "hypothyroïdie", "fibromyalgie", "lupus", "sclérose", "alzheimer",
+      "parkinson", "obésité", "cirrhose", "hépatite", "tuberculose",
+      "VIH", "SIDA", "insuffisance", "arythmie", "glaucome", "cataracte",
+      "migraine", "schizophrénie", "bipolaire", "TDAH", "autisme",
+      "dialyse", "chimiothérapie", "radiothérapie", "insuline",
+      "métformine", "anticoagulant", "statine", "anxiolytique",
+      "antidépresseur", "cardiopathie", "néphropathie", "neuropathie",
+      "psoriasis", "dermatite", "colite", "gastrite", "grossesse",
+      "handicap", "surdité", "cécité", "auto-immune", "endométriose"
+    ],
+    "nl": [
+      "diabetes", "hypertensie", "astma", "depressie", "angststoornis",
+      "kanker", "artritis", "osteoporose", "hartinfarct", "allergie",
+      "epilepsie", "hypothyreoïdie", "fibromyalgie", "lupus", "sclerose",
+      "alzheimer", "parkinson", "obesitas", "cirrose", "hepatitis",
+      "tuberculose", "HIV", "AIDS", "hartinsufficiëntie", "aritmie",
+      "glaucoom", "migraine", "schizofrenie", "bipolair", "ADHD",
+      "autisme", "dialyse", "chemotherapie", "insuline", "anticoagulant",
+      "statine", "antidepressivum", "zwangerschap", "bevalling",
+      "handicap", "doofheid", "blindheid", "auto-immuun", "psoriasis"
+    ],
+    "en": [
+      "diabetes", "hypertension", "asthma", "depression", "anxiety", "cancer",
+      "arthritis", "osteoporosis", "heart attack", "allergy", "epilepsy",
+      "hypothyroidism", "fibromyalgia", "lupus", "sclerosis", "alzheimer",
+      "parkinson", "obesity", "cirrhosis", "hepatitis", "tuberculosis",
+      "HIV", "AIDS", "heart failure", "arrhythmia", "glaucoma", "migraine",
+      "schizophrenia", "bipolar", "ADHD", "autism", "dialysis",
+      "chemotherapy", "insulin", "anticoagulant", "statin", "antidepressant",
+      "pregnancy", "disability", "deafness", "blindness", "autoimmune",
+      "endometriosis", "psoriasis", "dermatitis", "colitis", "gastritis"
+    ]
+  },
+
+  "employee_id_prefixes": [
+    "EMP", "EMPL", "EJ", "USR", "USER", "ID", "BADGE",
+    "AGENT", "REF", "EE", "HR", "SAP", "ADM", "MGR", "TEC",
+    "COL", "PERS", "MAT", "NUM", "COD", "REG", "FILE",
+    "AGT", "OPR", "CLT", "CLI", "CUS", "CUST", "ACC"
+  ]
+}

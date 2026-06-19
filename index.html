@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Simulador DLP educativo para detección y sanitización de datos sensibles en prompts de IA">
+    <meta name="author" content="Pedro D. Alcalá R.">
+    <title>La Lavadora de Datos — Simulador DLP</title>
+
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Favicons -->
+    <link rel="icon" href="favicon.ico" sizes="any">
+    <link rel="icon" href="src/assets/favicon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="src/assets/favicon.svg">
+
+    <link rel="stylesheet" href="src/styles/themes.css">
+    <link rel="stylesheet" href="src/styles/main.css">
+    <link rel="stylesheet" href="src/styles/components.css">
+    <link rel="stylesheet" href="src/styles/saas.css">
+</head>
+<body>
+
+<!-- file:// guard — a CLASSIC (non-module) inline script runs even when the ES
+     module app.js is refused by CORS over file://. Without a server the app's
+     JS never executes and the page looks "normal" (static fallback text) but is
+     dead. This turns that silent failure into a clear instruction. -->
+<script>
+(function () {
+    if (location.protocol !== 'file:') return;
+    document.addEventListener('DOMContentLoaded', function () {
+        var bar = document.createElement('div');
+        bar.setAttribute('role', 'alert');
+        bar.style.cssText = 'position:fixed;left:0;right:0;top:0;z-index:99999;padding:14px 18px;'
+            + 'background:#b00020;color:#fff;font:14px/1.5 system-ui,sans-serif;text-align:center;'
+            + 'box-shadow:0 2px 12px rgba(0,0,0,.3)';
+        bar.innerHTML = '⚠️ <strong>Esta app no funciona abierta como archivo (file://).</strong> '
+            + 'El navegador bloquea su código por seguridad. '
+            + 'Sírvela con un servidor local — en la carpeta del proyecto ejecuta '
+            + '<code style="background:rgba(255,255,255,.2);padding:1px 6px;border-radius:4px">npx serve .</code> '
+            + 'y abre <strong>http://localhost:3000/</strong> (o el puerto que indique).';
+        document.body.appendChild(bar);
+        document.body.style.paddingTop = '64px';
+    });
+})();
+</script>
+
+<!-- ===================== SVG SPRITE (hidden) ===================== -->
+<!-- Loaded inline so icons work with file:// AND http:// -->
+<div id="svgSprite" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+<svg xmlns="http://www.w3.org/2000/svg">
+  <defs>
+
+  <!-- moon -->
+  <symbol id="ic-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+  </symbol>
+
+  <!-- sun -->
+  <symbol id="ic-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="4.5"/>
+    <line x1="12" y1="1.5" x2="12" y2="3.5"/>
+    <line x1="12" y1="20.5" x2="12" y2="22.5"/>
+    <line x1="4.5" y1="4.5" x2="5.9" y2="5.9"/>
+    <line x1="18.1" y1="18.1" x2="19.5" y2="19.5"/>
+    <line x1="1.5" y1="12" x2="3.5" y2="12"/>
+    <line x1="20.5" y1="12" x2="22.5" y2="12"/>
+    <line x1="4.5" y1="19.5" x2="5.9" y2="18.1"/>
+    <line x1="18.1" y1="5.9" x2="19.5" y2="4.5"/>
+  </symbol>
+
+  <!-- keyboard -->
+  <symbol id="ic-keyboard" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="6" width="20" height="12" rx="2"/>
+    <circle cx="6"  cy="10" r="0.6" fill="currentColor" stroke="none"/>
+    <circle cx="10" cy="10" r="0.6" fill="currentColor" stroke="none"/>
+    <circle cx="14" cy="10" r="0.6" fill="currentColor" stroke="none"/>
+    <circle cx="18" cy="10" r="0.6" fill="currentColor" stroke="none"/>
+    <circle cx="6"  cy="14" r="0.6" fill="currentColor" stroke="none"/>
+    <circle cx="18" cy="14" r="0.6" fill="currentColor" stroke="none"/>
+    <line x1="8" y1="14" x2="16" y2="14"/>
+  </symbol>
+
+  <!-- close / X -->
+  <symbol id="ic-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <line x1="18" y1="6"  x2="6"  y2="18"/>
+    <line x1="6"  y1="6"  x2="18" y2="18"/>
+  </symbol>
+
+  <!-- file-import -->
+  <symbol id="ic-import" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <line x1="12" y1="18" x2="12" y2="12"/>
+    <polyline points="9 15 12 18 15 15"/>
+  </symbol>
+
+  <!-- copy -->
+  <symbol id="ic-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="9" y="9" width="13" height="13" rx="2"/>
+    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+  </symbol>
+
+  <!-- paste (clipboard) -->
+  <symbol id="ic-paste" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+    <rect x="8" y="2" width="8" height="4" rx="1"/>
+  </symbol>
+
+  <!-- chevron-left -->
+  <symbol id="ic-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="15 18 9 12 15 6"/>
+  </symbol>
+
+  <!-- chevron-right -->
+  <symbol id="ic-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="9 18 15 12 9 6"/>
+  </symbol>
+
+  <!-- download / export -->
+  <symbol id="ic-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+    <polyline points="7 10 12 15 17 10"/>
+    <line x1="12" y1="15" x2="12" y2="3"/>
+  </symbol>
+
+  <!-- trash / clear -->
+  <symbol id="ic-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="3 6 5 6 21 6"/>
+    <path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
+    <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+    <line x1="10" y1="11" x2="10" y2="17"/>
+    <line x1="14" y1="11" x2="14" y2="17"/>
+  </symbol>
+
+  <!-- search / magnify (audit) -->
+  <symbol id="ic-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="11" cy="11" r="8"/>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+  </symbol>
+
+  <!-- shield-check (sanitize) -->
+  <symbol id="ic-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    <polyline points="9 12 11 14 15 10"/>
+  </symbol>
+
+  <!-- undo -->
+  <symbol id="ic-undo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 7v6h6"/>
+    <path d="M3 13C5.33 7 11 5 16 7.5S22 16.5 18 20"/>
+  </symbol>
+
+  <!-- plus -->
+  <symbol id="ic-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+    <line x1="12" y1="5"  x2="12" y2="19"/>
+    <line x1="5"  y1="12" x2="19" y2="12"/>
+  </symbol>
+
+  <!-- clock / history -->
+  <symbol id="ic-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="10"/>
+    <polyline points="12 6 12 12 16 14"/>
+  </symbol>
+
+  <!-- settings / gear -->
+  <symbol id="ic-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+  </symbol>
+
+  <!-- bar-chart (stats) -->
+  <symbol id="ic-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <line x1="18" y1="20" x2="18" y2="10"/>
+    <line x1="12" y1="20" x2="12" y2="4"/>
+    <line x1="6"  y1="20" x2="6"  y2="14"/>
+    <line x1="2"  y1="20" x2="22" y2="20"/>
+  </symbol>
+
+  <!-- drag & drop file -->
+  <symbol id="ic-file-drop" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+    <polyline points="14 2 14 8 20 8"/>
+    <polyline points="9 14 12 11 15 14"/>
+    <line x1="12" y1="11" x2="12" y2="18"/>
+  </symbol>
+
+  <!-- alert-triangle (risk) -->
+  <symbol id="ic-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+    <line x1="12" y1="9"  x2="12" y2="13"/>
+    <line x1="12" y1="17" x2="12.01" y2="17"/>
+  </symbol>
+
+  <!-- eye (audit label) -->
+  <symbol id="ic-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+    <circle cx="12" cy="12" r="3"/>
+  </symbol>
+
+  <!-- check-circle -->
+  <symbol id="ic-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+    <polyline points="22 4 12 14.01 9 11.01"/>
+  </symbol>
+
+  <!-- washing machine (logo mark) -->
+  <symbol id="ic-washer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="3"/>
+    <line x1="2" y1="7" x2="22" y2="7"/>
+    <circle cx="4.5" cy="4.5" r="0.8" fill="currentColor" stroke="none"/>
+    <circle cx="7"   cy="4.5" r="0.8" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="14" r="5"/>
+    <circle cx="12" cy="14" r="2.5"/>
+    <polyline points="10 12.5 11.5 14 14.5 11.5" stroke-width="1.6"/>
+  </symbol>
+
+  </defs>
+</svg>
+</div>
+<!-- ============================================================== -->
+
+<div class="app-wrapper">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="app-header" role="banner">
+        <div class="header-content">
+            <div class="header-brand">
+                <span class="brand-icon" aria-hidden="true">
+                    <svg class="icon icon-xl"><use href="#ic-washer"/></svg>
+                </span>
+                <div class="header-text">
+                    <h1 data-i18n="title">La Lavadora de Datos</h1>
+                    <span class="header-subtitle" data-i18n="header_subtitle">Anonimización inteligente de datos sensibles</span>
+                </div>
+            </div>
+            <div class="header-actions">
+                <!-- Language selector -->
+                <div id="langSelector" class="lang-selector" role="group" aria-label="Selector de idioma"></div>
+
+                <button id="themeToggle" class="btn btn-icon" aria-label="Cambiar entre tema claro y oscuro" title="Cambiar tema (Ctrl+D)">
+                    <svg id="themeIcon" class="icon" aria-hidden="true"><use href="#ic-moon"/></svg>
+                </button>
+                <button id="shortcutsBtn" class="btn btn-icon" aria-label="Ver atajos de teclado" title="Atajos de teclado">
+                    <svg class="icon" aria-hidden="true"><use href="#ic-keyboard"/></svg>
+                </button>
+                <button id="helpBtn" class="btn btn-icon" data-i18n-aria="help" aria-label="Ayuda" data-i18n-title="help" title="Ayuda">
+                    <svg class="icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <div class="app-body">
+
+    <!-- ===================== SIDEBAR ===================== -->
+    <aside class="app-sidebar" aria-label="Navegación principal">
+        <span class="sidebar-heading" data-i18n="nav_section">Navegación</span>
+        <a class="nav-item nav-active" href="#sandboxArea">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-shield"/></svg>
+            <span data-i18n="nav_sanitizer">Sanitizador</span>
+        </a>
+        <a class="nav-item" href="#statsDashboard">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-search"/></svg>
+            <span data-i18n="nav_audit">Auditoría</span>
+        </a>
+        <a class="nav-item" href="#tokenmapPanel">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-copy"/></svg>
+            <span data-i18n="nav_tokens">Tokens</span>
+        </a>
+        <a class="nav-item" href="#historyPanel">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-clock"/></svg>
+            <span data-i18n="nav_history">Historial</span>
+        </a>
+        <a class="nav-item" href="#configPanel">
+            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-settings"/></svg>
+            <span data-i18n="nav_config">Configuración</span>
+        </a>
+        <span class="sidebar-spacer"></span>
+        <p class="sidebar-privacy" data-i18n="tokenmap_privacy">🔒 Todo se procesa localmente en tu navegador. Ningún valor sensible sale del dispositivo.</p>
+    </aside>
+
+    <div class="app-content">
+
+    <!-- Quick sticky actions: duplicates original controls without moving them -->
+    <nav class="quick-actions" role="toolbar" aria-label="Acciones rápidas de procesamiento">
+        <div class="quick-actions-inner">
+            <button class="btn btn-clear quick-action-btn" type="button" data-action-target="clearBtn" aria-label="Limpiar todo" title="Limpiar todo (Ctrl+L)">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-trash"/></svg>
+                <span data-i18n="btn_clear">Limpiar</span>
+            </button>
+            <button class="btn btn-audit quick-action-btn" type="button" data-action-target="auditBtn" aria-label="Auditar riesgos" title="Detectar y resaltar datos sensibles (Ctrl+Shift+A)">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-search"/></svg>
+                <span data-i18n="btn_audit">Auditar</span>
+            </button>
+            <button class="btn btn-sanitize quick-action-btn quick-action-primary" type="button" data-action-target="sanitizeBtn" aria-label="Sanitizar datos" title="Tokenizar datos sensibles (Ctrl+Enter)">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-shield"/></svg>
+                <span data-i18n="btn_sanitize">Sanitizar</span>
+            </button>
+            <button class="btn btn-undo quick-action-btn" type="button" data-action-target="undoBtn" aria-label="Deshacer última acción" title="Deshacer última acción (Ctrl+Z)" disabled>
+                <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-undo"/></svg>
+                <span data-i18n="btn_undo">Deshacer</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===================== MAIN ===================== -->
+    <main class="container" id="main" role="main">
+
+        <!-- Stats Dashboard -->
+        <section class="stats-dashboard" id="statsDashboard" aria-label="Panel de estadísticas de detección" hidden>
+            <div class="stats-grid">
+                <div class="stat-card stat-total">
+                    <span class="stat-number" id="statTotal">0</span>
+                    <span class="stat-label" data-i18n="stats_total">Total detectados</span>
+                </div>
+                <div class="stat-card stat-pii">
+                    <span class="stat-number" id="statPii">0</span>
+                    <span class="stat-label" data-i18n="stats_pii">PII</span>
+                </div>
+                <div class="stat-card stat-pci">
+                    <span class="stat-number" id="statPci">0</span>
+                    <span class="stat-label" data-i18n="stats_pci">PCI</span>
+                </div>
+                <div class="stat-card stat-risk">
+                    <span class="stat-number" id="statRisk">—</span>
+                    <span class="stat-label" data-i18n="stats_risk">Nivel de riesgo</span>
+                </div>
+            </div>
+            <!-- Risk meter progress bar -->
+            <div class="risk-meter" id="riskMeter" role="progressbar" aria-label="Nivel de riesgo visual" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="risk-fill" id="riskFill"></div>
+            </div>
+            <div class="breakdown" id="statsBreakdown" aria-label="Detalle por tipo de dato"></div>
+        </section>
+
+        <!-- Sandbox Area -->
+        <section class="sandbox-area" id="sandboxArea" aria-label="Área de trabajo DLP">
+
+            <!-- Mobile tab navigation (visible only on small screens) -->
+            <div class="mobile-tabs" role="tablist" aria-label="Paneles de trabajo">
+                <button class="tab-btn tab-active" role="tab" aria-selected="true" id="tabInput" aria-controls="panelInput">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-alert"/></svg>
+                    <span data-i18n="panel_input">Entrada</span>
+                </button>
+                <button class="tab-btn" role="tab" aria-selected="false" id="tabOutput" aria-controls="panelOutput">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-check"/></svg>
+                    <span data-i18n="panel_output">Salida</span>
+                </button>
+                <button class="tab-btn" role="tab" aria-selected="false" id="tabRestore" aria-controls="panelRestore">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-undo"/></svg>
+                    <span data-i18n="btn_restore">Restaurar</span>
+                </button>
+            </div>
+
+            <!-- Input Panel -->
+            <div class="panel input-panel" id="panelInput" role="tabpanel" aria-labelledby="tabInput">
+                <button class="panel-rail" id="railInput" aria-label="Expandir Entrada" aria-expanded="true">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-alert"/></svg>
+                    <span class="rail-label" data-i18n="panel_input">Entrada</span>
+                    <svg class="icon icon-sm rail-chevron" aria-hidden="true"><use href="#ic-chevron-right"/></svg>
+                </button>
+                <div class="panel-header">
+                    <h2>
+                        <svg class="icon panel-status-icon status-dirty" aria-hidden="true"><use href="#ic-alert"/></svg>
+                        <span data-i18n="panel_input">Entrada</span>
+                    </h2>
+                    <div class="panel-actions">
+                        <button class="btn btn-sm" id="pasteBtn" aria-label="Pegar desde el portapapeles" data-i18n-title="btn_paste" title="Pegar">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-paste"/></svg>
+                            <span data-i18n="btn_paste">Pegar</span>
+                        </button>
+                        <button class="btn btn-sm" id="importBtn" aria-label="Importar archivo de texto" title="Importar .txt / .csv (arrastrar también funciona)">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-import"/></svg>
+                            <span data-i18n="btn_import">Importar</span>
+                        </button>
+                        <input type="file" id="fileInput" accept=".txt,.md,.csv" hidden aria-hidden="true">
+                        <span class="char-count" id="charCount" aria-live="polite" aria-label="Contador de caracteres">0 chars</span>
+                    </div>
+                </div>
+                <div class="drop-zone" id="dropZone" role="region" aria-label="Zona de escritura y arrastre de archivos">
+                    <textarea
+                        id="inputText"
+                        data-i18n-placeholder="placeholder_input"
+                        placeholder="Ej: Hola, necesito analizar las ventas de Juan Pérez con DNI 12345678A, tarjeta 4500-1234-5678-9010 y teléfono 612 345 678..."
+                        aria-label="Texto de entrada con posibles datos sensibles"
+                        aria-describedby="inputHint"
+                        spellcheck="false"
+                        autocomplete="off"
+                    ></textarea>
+                    <div class="drop-overlay" aria-hidden="true">
+                        <svg class="icon icon-xl" aria-hidden="true"><use href="#ic-file-drop"/></svg>
+                        <span data-i18n="drop_hint">Suelta el archivo aquí</span>
+                    </div>
+                </div>
+                <p id="inputHint" class="sr-only">El procesamiento ocurre localmente en tu navegador. Ningún dato se envía a servidores.</p>
+            </div>
+
+            <!-- Assisted manual-correction popover (opens on text selection) -->
+            <div class="correction-menu" id="correctionMenu" role="dialog" aria-modal="true" aria-labelledby="corrTitleLabel" hidden>
+                <form id="correctionForm" class="correction-form">
+                    <div class="correction-head">
+                        <strong id="corrTitleLabel" data-i18n="corr_title">Corrección manual</strong>
+                        <button type="button" class="corr-close" id="correctionClose" aria-label="Cerrar">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-close"/></svg>
+                        </button>
+                    </div>
+
+                    <textarea id="corrValue" rows="2" class="corr-value-input" spellcheck="false" aria-label="Valor a tokenizar"></textarea>
+
+                    <!-- Single contextual hint: reuse › expansion › type guess -->
+                    <div class="corr-hint" id="corrHint" hidden>
+                        <span class="corr-hint-text" id="corrHintText"></span>
+                        <button type="button" class="corr-hint-btn" id="corrHintBtn" hidden></button>
+                    </div>
+
+                    <label class="corr-field" id="corrTypeField">
+                        <span data-i18n="corr_type">Tipo</span>
+                        <select id="corrType" aria-label="Tipo de dato"></select>
+                    </label>
+                    <input id="corrCustom" class="corr-custom-input" type="text" placeholder="NOMBRE_DEL_TIPO" autocomplete="off" aria-label="Nombre del nuevo tipo" hidden>
+
+                    <div class="corr-quick" role="group" aria-label="Acciones">
+                        <button type="submit" class="corr-btn corr-btn-primary" id="corrApply" data-i18n="corr_apply">Aplicar</button>
+                        <button type="button" class="corr-btn" id="corrQuickProtect" data-i18n="corr_quick_protect">Proteger</button>
+                        <button type="button" class="corr-btn" id="corrQuickIgnore" data-i18n="corr_quick_ignore">Ignorar</button>
+                    </div>
+
+                    <details class="corr-advanced" id="corrAdvanced">
+                        <summary data-i18n="corr_advanced">Opciones avanzadas</summary>
+                        <label class="corr-field">
+                            <span data-i18n="corr_action">Acción</span>
+                            <select id="corrAction" aria-label="Acción de corrección">
+                                <option value="create" data-i18n="corr_action_create">Marcar / crear token</option>
+                                <option value="extend" data-i18n="corr_action_extend">Extender token</option>
+                                <option value="replace" data-i18n="corr_action_replace">Reemplazar tipo</option>
+                                <option value="protect" data-i18n="corr_action_protect">Guardar tal cual</option>
+                                <option value="ignore" data-i18n="corr_action_ignore">Ignorar selección</option>
+                            </select>
+                        </label>
+                        <div class="corr-preview" id="corrPreview" hidden>
+                            <div class="corr-preview-row">
+                                <span class="corr-preview-tag corr-tag-before" data-i18n="corr_before">Antes</span>
+                                <code id="corrBefore"></code>
+                            </div>
+                            <div class="corr-preview-row">
+                                <span class="corr-preview-tag corr-tag-after" data-i18n="corr_after">Después</span>
+                                <code id="corrAfter"></code>
+                            </div>
+                        </div>
+                        <label class="corr-learn">
+                            <input type="checkbox" id="corrLearn">
+                            <span data-i18n="corr_learn">Recordar como regla local (aprendizaje)</span>
+                        </label>
+                    </details>
+
+                    <button type="button" class="corr-cancel-link" id="corrCancel" data-i18n="corr_cancel">Cancelar</button>
+                </form>
+            </div>
+
+            <!-- Output Panel -->
+            <div class="panel output-panel" id="panelOutput" role="tabpanel" aria-labelledby="tabOutput">
+                <div class="panel-header">
+                    <h2>
+                        <svg class="icon panel-status-icon status-clean" aria-hidden="true"><use href="#ic-check"/></svg>
+                        <span data-i18n="panel_output">Salida</span>
+                        <span class="sanitize-badge" role="status">
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-check"/></svg>
+                            <span data-i18n="success_badge">Sanitizado con éxito</span>
+                        </span>
+                    </h2>
+                    <div class="panel-actions">
+                        <button class="btn btn-sm" id="copyBtn" aria-label="Copiar solo el prompt limpio" title="Copiar prompt limpio (Ctrl+Shift+C)" disabled>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-copy"/></svg>
+                            <span data-i18n="btn_copy_prompt">Copiar prompt</span>
+                        </button>
+                        <button class="btn btn-sm" id="copyFullBtn" aria-label="Copiar el informe completo (auditoría y detalles)" title="Copiar informe completo" disabled>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-copy"/></svg>
+                            <span data-i18n="btn_copy_full">Copiar full</span>
+                        </button>
+                        <button class="btn btn-sm" id="exportBtn" aria-label="Exportar resultado como archivo .txt" title="Exportar (Ctrl+Shift+E)" disabled>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-download"/></svg>
+                            <span data-i18n="btn_export">Exportar</span>
+                        </button>
+                    </div>
+                </div>
+                <!-- Findings navigator -->
+                <div class="findings-nav" id="findingsNav" role="group" aria-label="Navegador de datos sensibles" hidden>
+                    <span class="findings-nav-label">
+                        <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-search"/></svg>
+                        <span data-i18n="nav_title">Datos sensibles</span>
+                    </span>
+                    <div class="findings-nav-controls">
+                        <button class="findings-nav-btn" id="findingPrevBtn" data-i18n-aria="nav_prev" aria-label="Dato anterior" data-i18n-title="nav_prev" title="Dato anterior">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-chevron-left"/></svg>
+                        </button>
+                        <span class="findings-counter" id="findingsCounter" aria-live="polite">0 / 0</span>
+                        <button class="findings-nav-btn" id="findingNextBtn" data-i18n-aria="nav_next" aria-label="Dato siguiente" data-i18n-title="nav_next" title="Dato siguiente">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-chevron-right"/></svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div
+                    id="resultBox"
+                    class="result-box"
+                    role="region"
+                    aria-label="Resultado del procesamiento DLP"
+                    aria-live="off"
+                    aria-atomic="false"
+                >
+                    <div class="result-empty-state">
+                        <svg class="icon icon-xl empty-icon" aria-hidden="true"><use href="#ic-shield"/></svg>
+                        <p data-i18n="result_placeholder">Esperando entrada...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Restore Panel (Privacy Gateway, third body) -->
+            <div class="panel restore-panel" id="panelRestore" role="tabpanel" aria-labelledby="tabRestore">
+                <button class="panel-rail" id="railRestore" aria-label="Expandir Restaurar" aria-expanded="false">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-undo"/></svg>
+                    <span class="rail-label" data-i18n="restore_title">Restaurar datos reales</span>
+                    <svg class="icon icon-sm rail-chevron" aria-hidden="true"><use href="#ic-chevron-left"/></svg>
+                </button>
+                <div class="panel-header">
+                    <h2>
+                        <svg class="icon panel-status-icon status-clean" aria-hidden="true"><use href="#ic-undo"/></svg>
+                        <span data-i18n="restore_title">Restaurar datos reales</span>
+                    </h2>
+                    <div class="panel-actions">
+                        <button class="btn btn-sm btn-outline" id="copySafeBtn" data-i18n-title="btn_copy_safe" title="Copiar texto seguro">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-copy"/></svg>
+                            <span data-i18n="btn_copy_safe">Copiar texto seguro</span>
+                        </button>
+                    </div>
+                </div>
+                <p class="gateway-hint" data-i18n="restore_hint">Pega la respuesta de tu LLM (con los tokens) para recuperar los valores originales.</p>
+                <textarea
+                    id="restoreInput"
+                    class="gateway-textarea"
+                    data-i18n-placeholder="restore_placeholder"
+                    placeholder="Pega aquí la respuesta de tu LLM, p. ej. «Buenos días [NOMBRE_1], …»"
+                    aria-label="Respuesta del LLM con tokens"
+                    spellcheck="false"
+                    autocomplete="off"
+                ></textarea>
+                <div class="gateway-actions">
+                    <button class="btn btn-sanitize" id="restoreBtn">
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-undo"/></svg>
+                        <span data-i18n="btn_restore">Restaurar</span>
+                    </button>
+                    <span class="restore-verify" id="restoreVerify" role="status" aria-live="polite"></span>
+                </div>
+                <div class="result-box gateway-output" id="restoreOutput" role="region" aria-label="Texto restaurado" aria-live="polite" hidden></div>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls" role="toolbar" aria-label="Controles de procesamiento">
+                <button class="btn btn-clear" id="clearBtn" title="Limpiar todo (Ctrl+L)">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-trash"/></svg>
+                    <span data-i18n="btn_clear">Limpiar</span>
+                </button>
+                <button class="btn btn-audit" id="auditBtn" title="Detectar y resaltar datos sensibles (Ctrl+Shift+A)">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-search"/></svg>
+                    <span data-i18n="btn_audit">Auditar</span>
+                </button>
+                <button class="btn btn-sanitize" id="sanitizeBtn" title="Tokenizar datos sensibles (Ctrl+Enter)">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-shield"/></svg>
+                    <span data-i18n="btn_sanitize">Sanitizar</span>
+                </button>
+                <button class="btn btn-undo" id="undoBtn" title="Deshacer última acción (Ctrl+Z)" disabled>
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-undo"/></svg>
+                    <span data-i18n="btn_undo">Deshacer</span>
+                </button>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend" role="list" aria-label="Leyenda de colores de resaltado">
+                <div class="legend-item" role="listitem">
+                    <span class="dot dot-pii" aria-hidden="true"></span>
+                    <span data-i18n="legend_pii">Personal</span>
+                </div>
+                <div class="legend-item" role="listitem">
+                    <span class="dot dot-pci" aria-hidden="true"></span>
+                    <span data-i18n="legend_pci">Financiero</span>
+                </div>
+                <div class="legend-item" role="listitem">
+                    <span class="dot dot-token" aria-hidden="true"></span>
+                    <span data-i18n="legend_token">Token</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Panel -->
+        <section class="history-panel" id="historyPanel" aria-label="Historial de acciones recientes" hidden>
+            <div class="history-header">
+                <h2>
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-clock"/></svg>
+                    <span data-i18n="history_title">Historial de Acciones</span>
+                </h2>
+                <button class="btn btn-sm btn-outline" id="clearHistoryBtn" aria-label="Limpiar historial" title="Limpiar historial">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-trash"/></svg>
+                </button>
+            </div>
+            <ol class="history-list" id="historyList" aria-label="Lista cronológica de acciones. Haz clic en una para restaurar ese estado."></ol>
+        </section>
+
+        <!-- Temporal Memory Panel (Token Painter session decisions) -->
+        <section class="memory-panel" id="memoryPanel" aria-label="Memoria temporal de la sesión" hidden>
+            <div class="memory-header">
+                <h2>
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-clock"/></svg>
+                    <span data-i18n="memory_title">Memoria temporal</span>
+                    <span class="memory-count" id="memoryCount" aria-label="Decisiones guardadas">0</span>
+                </h2>
+                <label class="memory-remember" title="Guardar estas decisiones para próximas sesiones (localStorage)">
+                    <input type="checkbox" id="memoryRemember">
+                    <span data-i18n="memory_remember">Recordar para próximas sesiones</span>
+                </label>
+            </div>
+            <p class="memory-hint" data-i18n="memory_hint">Tus decisiones de sesión: tokens libres, frases protegidas e ignoradas. Nada se aplica sin tu control.</p>
+            <div class="memory-table-wrap">
+                <table class="memory-table" aria-label="Decisiones de la sesión">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-i18n="mem_type">Tipo</th>
+                            <th scope="col" data-i18n="mem_name">Nombre</th>
+                            <th scope="col" data-i18n="mem_value">Valor</th>
+                            <th scope="col" data-i18n="mem_action">Acción</th>
+                            <th scope="col" data-i18n="mem_state">Estado</th>
+                            <th scope="col" data-i18n="mem_actions">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="memoryBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Token Map Panel (assisted manual correction) -->
+        <section class="tokenmap-panel" id="tokenmapPanel" aria-label="Mapa de tokens y correcciones manuales" hidden>
+            <div class="tokenmap-header">
+                <h2>
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-shield"/></svg>
+                    <span data-i18n="tokenmap_title">Mapa de tokens</span>
+                    <span class="tokenmap-count" id="tokenmapCount" aria-label="Número de tokens">0</span>
+                </h2>
+                <div class="tokenmap-actions">
+                    <button class="btn btn-sm btn-undo" id="corrUndoBtn" title="Deshacer última corrección" disabled>
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-undo"/></svg>
+                        <span data-i18n="corr_undo">Deshacer corrección</span>
+                    </button>
+                    <div class="export-group" role="group" aria-label="Exportar resultados">
+                        <button class="btn btn-sm btn-outline" id="exportCleanBtn" title="Exportar prompt limpio (.txt)">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-download"/></svg>
+                            <span data-i18n="export_clean">Prompt limpio</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline" id="exportMapBtn" title="Exportar mapa de tokens (JSON)">
+                            <span data-i18n="export_map">Mapa JSON</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline" id="exportAuditCsvBtn" title="Exportar auditoría (CSV)">
+                            <span data-i18n="export_audit_csv">Auditoría CSV</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline" id="exportAuditJsonBtn" title="Exportar auditoría (JSON)">
+                            <span data-i18n="export_audit_json">Auditoría JSON</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline" id="exportRulesBtn" title="Exportar reglas aprendidas (JSON)">
+                            <span data-i18n="export_rules">Reglas JSON</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline" id="exportMemoryBtn" title="Exportar memoria temporal (JSON)">
+                            <span data-i18n="export_memory">Memoria JSON</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline" id="exportProtectedBtn" title="Exportar frases protegidas (JSON)">
+                            <span data-i18n="export_protected">Protegidas JSON</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="tokenmap-table-wrap">
+                <table class="tokenmap-table" aria-label="Mapa de tokens detectados y manuales">
+                    <thead>
+                        <tr>
+                            <th scope="col" data-i18n="tm_token">Token</th>
+                            <th scope="col" data-i18n="tm_type">Tipo</th>
+                            <th scope="col" data-i18n="tm_value">Valor original</th>
+                            <th scope="col" data-i18n="tm_risk">Riesgo</th>
+                            <th scope="col" data-i18n="tm_confidence">Confianza</th>
+                            <th scope="col" data-i18n="tm_actions">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tokenmapBody"></tbody>
+                </table>
+            </div>
+            <details class="audit-log-details" id="auditLogDetails">
+                <summary class="audit-log-summary">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-clock"/></svg>
+                    <span data-i18n="audit_log_title">Auditoría de correcciones</span>
+                    <span class="audit-log-count" id="auditLogCount">0</span>
+                </summary>
+                <ol class="audit-log-list" id="auditLogList" aria-label="Registro de correcciones manuales"></ol>
+            </details>
+            <p class="tokenmap-privacy" data-i18n="tokenmap_privacy">
+                🔒 Todo se procesa localmente en tu navegador. Ningún valor sensible sale del dispositivo.
+            </p>
+        </section>
+
+        <!-- Custom Patterns Panel -->
+        <section class="custom-patterns-panel" id="configPanel" aria-label="Gestión de patrones de detección">
+            <details id="patternsDetails">
+                <summary class="patterns-summary">
+                    <span class="patterns-summary-label">
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-settings"/></svg>
+                        <span data-i18n="patterns_title">Patrones de Detección</span>
+                    </span>
+                    <span class="patterns-count" id="patternsCount" aria-label="Patrones activos"></span>
+                </summary>
+                <div class="patterns-content">
+                    <!-- Pattern search -->
+                    <div class="pattern-search-wrap">
+                        <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-search"/></svg>
+                        <input
+                            type="search"
+                            id="patternSearch"
+                            data-i18n-placeholder="patterns_search"
+                            placeholder="Buscar patrón..."
+                            aria-label="Buscar patrón"
+                            autocomplete="off"
+                        >
+                    </div>
+                    <div class="patterns-list" id="patternsList" role="list" aria-label="Lista de patrones configurados"></div>
+                    <form class="pattern-add-form" id="patternAddForm" aria-label="Añadir nuevo patrón personalizado" novalidate>
+                        <input
+                            type="text"
+                            id="patternName"
+                            data-i18n-placeholder="patterns_add_name"
+                            placeholder="Nombre (ej: IBAN)"
+                            aria-label="Nombre del nuevo patrón"
+                            autocomplete="off"
+                            maxlength="40"
+                        >
+                        <input
+                            type="text"
+                            id="patternRegex"
+                            data-i18n-placeholder="patterns_add_regex"
+                            placeholder="Regex (ej: [A-Z]{2}\d{22})"
+                            aria-label="Expresión regular del patrón"
+                            autocomplete="off"
+                        >
+                        <select id="patternType" aria-label="Tipo de dato sensible">
+                            <option value="pii" data-i18n="patterns_type_pii">PII</option>
+                            <option value="pci" data-i18n="patterns_type_pci">PCI</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-add" id="addPatternBtn">
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-plus"/></svg>
+                            <span data-i18n="patterns_add_btn">Añadir</span>
+                        </button>
+                    </form>
+                    <p class="pattern-error" id="patternError" role="alert" aria-live="assertive" hidden></p>
+
+                    <!-- Shareable rule packs (patterns only — no personal data) -->
+                    <div class="pattern-pack" role="group" aria-label="Packs de reglas">
+                        <span class="pattern-pack-label" data-i18n="pack_label">Pack de reglas (sin datos personales):</span>
+                        <button type="button" class="btn btn-sm btn-outline" id="exportPackBtn" title="Exportar tus patrones como pack compartible">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-download"/></svg>
+                            <span data-i18n="pack_export">Exportar pack</span>
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline" id="importPackBtn" title="Importar un pack de patrones">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-import"/></svg>
+                            <span data-i18n="pack_import">Importar pack</span>
+                        </button>
+                        <input type="file" id="packFileInput" accept=".json,application/json" hidden aria-hidden="true">
+                    </div>
+                </div>
+            </details>
+        </section>
+
+        <!-- Bottom docked cards: Confianza · Información · Atajos -->
+        <section class="dashboard-cards" aria-label="Resumen e información">
+            <div class="dash-card confidence-card">
+                <span class="dash-card-title">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-chart"/></svg>
+                    <span data-i18n="conf_title">Puntuación de confianza</span>
+                </span>
+                <span class="conf-value" id="confidenceValue">—</span>
+                <div class="confidence-bar" id="confidenceBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                    <div class="confidence-fill" id="confidenceFill" style="width:0%"></div>
+                </div>
+                <p data-i18n="conf_desc">Precisión media de la detección en este texto.</p>
+            </div>
+
+            <div class="dash-card info-card">
+                <span class="dash-card-title">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-shield"/></svg>
+                    <span data-i18n="info_title">¿Cómo funciona la anonimización?</span>
+                </span>
+                <p data-i18n="info_body">Cada dato sensible se sustituye por un token reversible (p. ej. [PERSONA_1]). El texto limpio puede enviarse a una IA sin exponer información real; después puedes restaurar los valores originales localmente.</p>
+            </div>
+
+            <div class="dash-card shortcuts-card">
+                <span class="dash-card-title">
+                    <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-keyboard"/></svg>
+                    <span data-i18n="shortcuts_title">Atajos de Teclado</span>
+                </span>
+                <div class="dock-shortcuts">
+                    <div class="dock-shortcut"><span data-i18n="shortcut_sanitize">Sanitizar texto</span><span><kbd>Ctrl</kbd>+<kbd>Enter</kbd></span></div>
+                    <div class="dock-shortcut"><span data-i18n="shortcut_audit">Auditar riesgos</span><span><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></span></div>
+                    <div class="dock-shortcut"><span data-i18n="shortcut_clear">Limpiar todo</span><span><kbd>Ctrl</kbd>+<kbd>L</kbd></span></div>
+                    <div class="dock-shortcut"><span data-i18n="shortcut_undo">Deshacer</span><span><kbd>Ctrl</kbd>+<kbd>Z</kbd></span></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="app-footer" role="contentinfo">
+        <p data-i18n="footer_course">Recurso educativo — el procesamiento ocurre 100% en tu navegador.</p>
+        <span id="versionTag" class="version-tag"></span>
+    </footer>
+
+    </div><!-- .app-content -->
+    </div><!-- .app-body -->
+
+</div><!-- .app-wrapper -->
+
+<!-- Toast container -->
+<div class="toast-container" id="toastContainer" role="status" aria-live="polite" aria-atomic="false"></div>
+
+<!-- Keyboard shortcuts modal -->
+<div class="modal" id="shortcutsModal" role="dialog" aria-modal="true" aria-labelledby="shortcutsTitle" hidden>
+    <div class="modal-backdrop" id="modalBackdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="modal-header-icon" aria-hidden="true">
+                <svg class="icon" aria-hidden="true"><use href="#ic-keyboard"/></svg>
+            </span>
+            <h2 id="shortcutsTitle" data-i18n="shortcuts_title">Atajos de Teclado</h2>
+            <button class="btn btn-icon modal-close" id="closeModalBtn" aria-label="Cerrar modal de atajos">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-close"/></svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <table class="shortcuts-table" aria-label="Tabla de atajos de teclado disponibles">
+                <thead>
+                    <tr>
+                        <th scope="col">Atajo</th>
+                        <th scope="col">Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td>
+                        <td>
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-shield"/></svg>
+                            <span data-i18n="shortcut_sanitize">Sanitizar texto</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>A</kbd></td>
+                        <td>
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-search"/></svg>
+                            <span data-i18n="shortcut_audit">Auditar riesgos</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Ctrl</kbd>+<kbd>L</kbd></td>
+                        <td>
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-trash"/></svg>
+                            <span data-i18n="shortcut_clear">Limpiar todo</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Ctrl</kbd>+<kbd>Z</kbd></td>
+                        <td>
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-undo"/></svg>
+                            <span data-i18n="shortcut_undo">Deshacer</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Ctrl</kbd>+<kbd>D</kbd></td>
+                        <td>
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-moon"/></svg>
+                            <span data-i18n="shortcut_theme">Cambiar tema claro/oscuro</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>C</kbd></td>
+                        <td>
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-copy"/></svg>
+                            <span data-i18n="shortcut_copy">Copiar resultado</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>E</kbd></td>
+                        <td>
+                            <svg class="icon icon-xs" aria-hidden="true"><use href="#ic-download"/></svg>
+                            <span data-i18n="shortcut_export">Exportar resultado</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Esc</kbd></td>
+                        <td><span data-i18n="shortcut_close">Cerrar este modal</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="module" src="src/scripts/app.js"></script>
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+</script>
+</body>
+</html>

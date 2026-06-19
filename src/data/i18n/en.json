@@ -1,0 +1,563 @@
+{
+  "lang": "en",
+  "langName": "English",
+  "dir": "ltr",
+  "ui": {
+    "title": "The Data Washer",
+    "subtitle": "DLP Sandbox & Prompt Sanitization for AI",
+    "instructions": "Paste text with (fictional) sensitive data into the left panel. Use <strong>Audit</strong> to detect risks and <strong>Sanitize</strong> for automatic tokenization before sending to an AI.",
+    "btn_clear": "Clear",
+    "btn_audit": "Audit",
+    "btn_sanitize": "Sanitize",
+    "btn_undo": "Undo",
+    "btn_copy": "Copy",
+    "btn_copy_prompt": "Copy prompt",
+    "btn_copy_full": "Copy full",
+    "btn_export": "Export",
+    "btn_import": "Import",
+    "panel_input": "Input",
+    "panel_input_subtitle": "(Dirty Prompt)",
+    "panel_output": "Output",
+    "panel_output_subtitle": "(Safe Prompt)",
+    "placeholder_input": "E.g.: Hello, I need to analyse sales for John Smith, SSN 123-45-6789, card 4500-1234-5678-9010, phone +1 555 234 5678...",
+    "result_placeholder": "Waiting for input...",
+    "result_processing": "Processing...",
+    "result_no_findings": "No sensitive data detected in the text.",
+    "char_count": "{n} chars",
+    "stats_title": "Analysis Results",
+    "stats_total": "Total detected",
+    "stats_pii": "PII",
+    "stats_pci": "PCI",
+    "stats_risk": "Risk level",
+    "risk_none": "—",
+    "risk_low": "LOW",
+    "risk_medium": "MEDIUM",
+    "risk_high": "HIGH",
+    "legend_pii": "Personal",
+    "legend_pci": "Financial",
+    "legend_token": "Token",
+    "history_title": "Recent conversations",
+    "history_clear": "Clear conversations",
+    "history_empty": "No sanitized conversations yet.",
+    "history_restore_hint": "Click to restore this sanitized conversation",
+    "patterns_title": "Detection Patterns",
+    "patterns_desc": "Enable, disable or add patterns. Changes are saved automatically.",
+    "patterns_add_name": "Name (e.g.: IBAN)",
+    "patterns_add_regex": "Regex (e.g.: [A-Z]{2}\\d{22})",
+    "patterns_add_btn": "Add",
+    "patterns_search": "Search pattern...",
+    "patterns_type_pii": "PII",
+    "patterns_type_pci": "PCI",
+    "pattern_remove_tip": "Remove pattern",
+    "pattern_builtin_tip": "Built-in pattern (cannot be removed)",
+    "shortcuts_title": "Keyboard Shortcuts",
+    "shortcut_sanitize": "Sanitize text",
+    "shortcut_audit": "Audit risks",
+    "shortcut_clear": "Clear all",
+    "shortcut_undo": "Undo",
+    "shortcut_theme": "Toggle light/dark theme",
+    "shortcut_copy": "Copy result",
+    "shortcut_export": "Export result",
+    "shortcut_close": "Close modal",
+    "drop_hint": "Drop file here",
+    "toast_no_input": "Enter text in the input panel first.",
+    "toast_no_findings": "No sensitive data detected. ✓",
+    "toast_findings": "{n} sensitive item{s} detected.",
+    "toast_sanitized": "{n} item{s} tokenized. Prompt is now safe.",
+    "toast_no_replace": "No sensitive data found. Text is already clean. ✓",
+    "toast_cleared": "Everything cleared.",
+    "toast_undo": "Action undone.",
+    "toast_copied": "Result copied to clipboard.",
+    "toast_copy_fail": "Could not copy. Please select the text manually.",
+    "toast_exported": "Exported as {filename}",
+    "toast_imported": "File \"{name}\" loaded.",
+    "toast_import_error": "Error reading the file.",
+    "toast_import_type": "Unsupported type. Use .txt, .md or .csv",
+    "toast_pattern_added": "Pattern \"{name}\" added.",
+    "toast_pattern_removed": "Pattern \"{name}\" removed.",
+    "toast_pattern_on": "Pattern \"{name}\" enabled.",
+    "toast_pattern_off": "Pattern \"{name}\" disabled.",
+    "toast_history_cleared": "Sanitized conversations cleared.",
+    "toast_theme_dark": "Dark theme enabled.",
+    "toast_theme_light": "Light theme enabled.",
+    "toast_lang_changed": "Language changed to English.",
+    "error_pattern_name_empty": "Name cannot be empty.",
+    "error_pattern_duplicate": "A pattern named \"{name}\" already exists.",
+    "history_action_audit": "AUDIT",
+    "history_action_sanitize": "SANITIZE",
+    "history_desc_audit": "Audit: {n} finding(s) — {level} risk",
+    "history_desc_sanitize": "Sanitized: {n} replacement(s)",
+    "group_global": "Universal",
+    "group_personal": "Personal data (lexicon)",
+    "group_financial": "Financial",
+    "group_tech": "Technology",
+    "group_es": "Spain",
+    "group_us": "United States",
+    "group_nl": "Netherlands",
+    "group_fr": "France",
+    "group_uk": "United Kingdom",
+    "group_mx": "Mexico",
+    "footer_course": "Resource from the course \"Cybersecurity in Generative AI: Risk Management and Control\" — Educational use only.",
+    "footer_instructor": "Instructor",
+    "btn_paste": "Paste",
+    "toast_pasted": "Text pasted from clipboard.",
+    "toast_paste_empty": "The clipboard is empty.",
+    "toast_paste_fail": "Couldn't read the clipboard. Paste manually with Ctrl+V.",
+    "toast_paste_unsupported": "Your browser won't allow pasting here. Use Ctrl+V.",
+    "nav_title": "Sensitive data",
+    "nav_prev": "Previous item",
+    "nav_next": "Next item",
+    "restore_title": "Restore real data",
+    "restore_hint": "Paste your LLM's response (with the tokens) to recover the original values.",
+    "restore_placeholder": "Paste your LLM response here, e.g. \"Good morning [NOMBRE_1], …\"",
+    "btn_restore": "Restore",
+    "btn_copy_safe": "Copy safe text",
+    "restore_step1": "Copy the safe text",
+    "restore_step2": "Paste it into your LLM",
+    "restore_step3": "Paste its response here",
+    "restore_step4": "Restore the data",
+    "restore_ok": "✓ Restored · no orphan placeholders",
+    "restore_orphans": "⚠ Restored · {n} orphan placeholder(s): {list}",
+    "restore_invented": "⛔ The LLM included UN-anonymized data: {list}",
+    "toast_restored": "Real data restored.",
+    "toast_restore_empty": "Nothing to restore.",
+    "lang_selector_label": "Language",
+    "corr_title": "Manual correction",
+    "corr_value": "Sensitive value",
+    "corr_suggestion": "Possible expansion detected",
+    "corr_accept": "Accept",
+    "corr_reject": "Reject",
+    "corr_action": "Action",
+    "corr_action_create": "Mark / create token",
+    "corr_action_extend": "Extend token",
+    "corr_action_replace": "Replace type",
+    "corr_action_ignore": "Ignore selection",
+    "corr_type": "Data type",
+    "corr_custom": "Custom token (optional)",
+    "corr_before": "Before",
+    "corr_after": "After",
+    "corr_learn": "Remember as a local rule (learning)",
+    "corr_cancel": "Cancel",
+    "corr_apply": "Apply",
+    "corr_undo": "Undo correction",
+    "tokenmap_title": "Token map",
+    "tokenmap_privacy": "🔒 Everything is processed locally in your browser. No sensitive value leaves your device.",
+    "tm_token": "Token",
+    "tm_type": "Type",
+    "tm_value": "Original value",
+    "tm_risk": "Risk",
+    "tm_confidence": "Confidence",
+    "tm_actions": "Actions",
+    "audit_log_title": "Correction audit",
+    "export_clean": "Clean prompt",
+    "export_map": "Map JSON",
+    "export_audit_csv": "Audit CSV",
+    "export_audit_json": "Audit JSON",
+    "export_rules": "Rules JSON",
+    "export_memory": "Memory JSON",
+    "export_protected": "Protected JSON",
+    "corr_reuse_pre": "Already exists as",
+    "corr_reuse_btn": "Reuse",
+    "corr_quick_apply": "Apply suggested",
+    "corr_quick_protect": "Keep as-is",
+    "corr_quick_ignore": "Ignore",
+    "corr_action_protect": "Keep as-is",
+    "corr_advanced": "Advanced options",
+    "corr_guess_pre": "Looks like",
+    "corr_type_new": "New type…",
+    "report_more": "View audit & details",
+    "pack_label": "Rule pack (no personal data):",
+    "pack_export": "Export pack",
+    "pack_import": "Import pack",
+    "memory_title": "Temporal memory",
+    "memory_remember": "Remember for future sessions",
+    "memory_hint": "Your session decisions: free tokens, protected and ignored phrases. Nothing is applied without your control.",
+    "mem_type": "Type",
+    "mem_name": "Name",
+    "mem_value": "Value",
+    "mem_action": "Action",
+    "mem_state": "State",
+    "mem_actions": "Actions",
+    "header_subtitle": "Smart anonymization of sensitive data",
+    "help": "Help",
+    "nav_section": "Navigation",
+    "nav_sanitizer": "Sanitizer",
+    "nav_audit": "Audit",
+    "nav_tokens": "Tokens",
+    "nav_history": "History",
+    "nav_config": "Settings",
+    "conf_title": "Confidence score",
+    "conf_desc": "Average detection accuracy for this text.",
+    "info_title": "How does anonymization work?",
+    "info_body": "Each piece of sensitive data is replaced by a reversible token (e.g. [PERSON_1]). The clean text can be sent to an AI without exposing real information; afterwards you can restore the original values locally.",
+    "success_badge": "Sanitized successfully",
+    "patterns_custom_group": "Custom",
+    "conf_empty": "—",
+    "action_edit": "Edit",
+    "action_replace": "Replace",
+    "action_delete": "Delete",
+    "action_generalize": "Generalize",
+    "action_generalize_tip": "Learn the format as a reusable pattern",
+    "action_activate": "Activate",
+    "action_deactivate": "Deactivate",
+    "action_permanent": "Permanent",
+    "tm_empty": "No tokens yet. Sanitize a text or mark data manually.",
+    "mem_tipo_protect": "PROTECTED PHRASE",
+    "mem_tipo_ignore": "IGNORED",
+    "mem_tipo_free": "FREE TOKEN",
+    "mem_tipo_token": "TOKEN",
+    "mem_accion_protect": "Keep as-is",
+    "mem_accion_ignore": "Do not analyze",
+    "mem_accion_replace": "Replace",
+    "mem_state_active": "Active",
+    "mem_state_inactive": "Disabled",
+    "mem_perm": "Permanent",
+    "mem_temp": "Temporary",
+    "mem_no_token": "No token",
+    "corr_verb_create": "Token created",
+    "corr_verb_extend": "Token extended",
+    "corr_verb_replace": "Type replaced",
+    "corr_verb_protect": "Phrase protected (as-is)",
+    "corr_verb_ignore": "Selection ignored",
+    "corr_verb_default": "Correction applied",
+    "corr_undone": "Correction undone",
+    "audit_act_create": "Token creation",
+    "audit_act_extend": "Token extension",
+    "audit_act_replace": "Type replacement",
+    "audit_act_protect": "Phrase protected",
+    "audit_act_ignore": "Selection ignored",
+    "audit_act_delete": "Token deletion",
+    "audit_act_default": "Manual correction",
+    "audit_act_undo": "Undo correction",
+    "toast_value_not_found": "That text does not appear in the Dirty Prompt.",
+    "toast_select_value": "Select a value.",
+    "toast_generalize_only_tokens": "Only tokens can be generalized (not protected/ignored phrases).",
+    "toast_generalize_too_variable": "That value is too variable to generalize.",
+    "toast_pattern_exists": "That pattern already exists.",
+    "toast_entry_deleted": "Entry deleted",
+    "toast_saved_future": "Saved for future sessions",
+    "toast_rule_permanent": "Turned into a permanent rule",
+    "toast_token_deleted": "Token deleted",
+    "toast_enabled": "Enabled",
+    "toast_disabled": "Disabled",
+    "toast_remember_on": "I'll remember your decisions",
+    "toast_remember_off": "Only for this session",
+    "toast_learned_format": "Format learned: /{regex}/ → [{base}]. Review it in Patterns.",
+    "toast_export_clean": "Clean prompt exported",
+    "toast_no_tokens_export": "No tokens to export.",
+    "toast_export_map": "Token map exported",
+    "toast_audit_empty": "Audit is empty.",
+    "toast_export_audit_csv": "Audit CSV exported",
+    "toast_export_audit_json": "Audit JSON exported",
+    "toast_no_rules": "No learned rules.",
+    "toast_export_rules": "Rules exported",
+    "toast_memory_empty": "Temporary memory is empty.",
+    "toast_export_memory": "Temporary memory exported",
+    "toast_no_protected": "No protected phrases.",
+    "toast_export_protected": "Protected phrases exported",
+    "toast_no_custom_patterns": "No custom patterns to share.",
+    "toast_pack_invalid": "Could not read the pack (invalid JSON).",
+    "toast_pack_imported": "Pack imported: {added} added, {skipped} skipped.",
+    "toast_pack_exported": "Pack exported ({n} patterns, no personal data)."
+  },
+  "patterns": {
+    "email": {
+      "name": "Email",
+      "label": "Email detected"
+    },
+    "phone_es": {
+      "name": "Phone ES",
+      "label": "Spanish phone number"
+    },
+    "phone_intl": {
+      "name": "International Phone",
+      "label": "International phone number"
+    },
+    "ip": {
+      "name": "IPv4 Address",
+      "label": "IP address (v4)"
+    },
+    "ipv6": {
+      "name": "IPv6 Address",
+      "label": "IP address (v6)"
+    },
+    "mac": {
+      "name": "MAC Address",
+      "label": "Network MAC address"
+    },
+    "gps_coords": {
+      "name": "GPS Coordinates",
+      "label": "Geolocation coordinates"
+    },
+    "dob": {
+      "name": "Date of Birth",
+      "label": "Date of birth in text"
+    },
+    "passport": {
+      "name": "Passport",
+      "label": "Passport number"
+    },
+    "jwt": {
+      "name": "JWT Token",
+      "label": "JSON Web Token"
+    },
+    "api_key": {
+      "name": "API Key / Token",
+      "label": "API key or access token"
+    },
+    "password_text": {
+      "name": "Password in text",
+      "label": "Plaintext credential"
+    },
+    "creditCard": {
+      "name": "Credit Card",
+      "label": "Card number (PCI)"
+    },
+    "cvv": {
+      "name": "CVV / CVC",
+      "label": "Card security code"
+    },
+    "card_expiry": {
+      "name": "Card Expiry",
+      "label": "Card expiration date"
+    },
+    "iban": {
+      "name": "IBAN",
+      "label": "Bank account IBAN"
+    },
+    "bic": {
+      "name": "BIC / SWIFT",
+      "label": "BIC/SWIFT bank code"
+    },
+    "bitcoin": {
+      "name": "BTC Wallet",
+      "label": "Bitcoin address"
+    },
+    "ethereum": {
+      "name": "ETH Wallet",
+      "label": "Ethereum address"
+    },
+    "dni": {
+      "name": "DNI (Spain)",
+      "label": "Spanish national ID"
+    },
+    "nie": {
+      "name": "NIE (Spain)",
+      "label": "Foreigner ID in Spain"
+    },
+    "nif_empresa": {
+      "name": "NIF Company (Spain)",
+      "label": "Spanish company tax ID"
+    },
+    "ss_es": {
+      "name": "Social Security (Spain)",
+      "label": "Spanish SS number"
+    },
+    "licencePlate_es": {
+      "name": "Licence Plate ES",
+      "label": "Spanish licence plate"
+    },
+    "names_es": {
+      "name": "Spanish Names",
+      "label": "Spanish first name detected"
+    },
+    "ssn": {
+      "name": "SSN (USA)",
+      "label": "Social Security Number"
+    },
+    "ein": {
+      "name": "EIN (USA)",
+      "label": "Employer Identification Number"
+    },
+    "zip_us": {
+      "name": "ZIP Code (USA)",
+      "label": "US postal code"
+    },
+    "bsn": {
+      "name": "BSN (Netherlands)",
+      "label": "Burgerservicenummer"
+    },
+    "names_nl": {
+      "name": "Dutch Names",
+      "label": "Dutch first name detected"
+    },
+    "insee": {
+      "name": "NIR/INSEE (France)",
+      "label": "French Social Security number"
+    },
+    "siret": {
+      "name": "SIRET (France)",
+      "label": "French company number"
+    },
+    "names_fr": {
+      "name": "French Names",
+      "label": "French first name detected"
+    },
+    "nino": {
+      "name": "NINO (UK)",
+      "label": "National Insurance Number UK"
+    },
+    "nhs": {
+      "name": "NHS Number (UK)",
+      "label": "NHS Number UK"
+    },
+    "uk_postcode": {
+      "name": "Postcode (UK)",
+      "label": "UK postal code"
+    },
+    "curp": {
+      "name": "CURP (Mexico)",
+      "label": "Mexican CURP"
+    },
+    "rfc": {
+      "name": "RFC (Mexico)",
+      "label": "Mexican RFC"
+    },
+    "aws_access_key": {
+      "name": "AWS Access Key ID",
+      "label": "AWS access key"
+    },
+    "github_token": {
+      "name": "GitHub Token",
+      "label": "GitHub access token"
+    },
+    "google_api_key": {
+      "name": "Google API Key",
+      "label": "Google API key"
+    },
+    "stripe_key": {
+      "name": "Stripe API Key",
+      "label": "Stripe API key"
+    },
+    "slack_token": {
+      "name": "Slack Token",
+      "label": "Slack access token"
+    },
+    "openai_key": {
+      "name": "OpenAI API Key",
+      "label": "OpenAI API key"
+    },
+    "sendgrid_key": {
+      "name": "SendGrid API Key",
+      "label": "SendGrid API key"
+    },
+    "gitlab_token": {
+      "name": "GitLab Token",
+      "label": "GitLab personal access token"
+    },
+    "npm_token": {
+      "name": "npm Token",
+      "label": "npm access token"
+    },
+    "twilio_sid": {
+      "name": "Twilio Account SID",
+      "label": "Twilio account identifier"
+    },
+    "mailgun_key": {
+      "name": "Mailgun API Key",
+      "label": "Mailgun API key"
+    },
+    "private_key_pem": {
+      "name": "Private Key (PEM)",
+      "label": "PEM private key block (RSA/EC/service-account)"
+    },
+    "secret_entropy": {
+      "name": "Secret (entropy)",
+      "label": "High-entropy string (possible key/secret)"
+    },
+    "address_fr_context": {
+      "name": "Address FR/BE",
+      "label": "French or Belgian postal address"
+    },
+    "postal_code_be": {
+      "name": "Postal code BE",
+      "label": "Belgian postal code with city"
+    },
+    "rrn_be": {
+      "name": "National Register (BE)",
+      "label": "Belgian National Register Number"
+    },
+    "address_nl_context": {
+      "name": "Address NL",
+      "label": "Dutch postal address"
+    },
+    "postal_code_nl": {
+      "name": "Postal code NL",
+      "label": "Dutch postal code (1234 AB) with city"
+    },
+    "address_en_context": {
+      "name": "Address EN",
+      "label": "English postal address (number + street)"
+    },
+    "names_en": {
+      "name": "Names EN",
+      "label": "English personal name"
+    },
+    "nationality_intl_context": {
+      "name": "Nationality (multi-language)",
+      "label": "Nationality by label (fr/nl/en)"
+    },
+    "cities_eu": {
+      "name": "EU cities (lexicon)",
+      "label": "European city (fr/nl/en) by dictionary"
+    },
+    "countries_intl": {
+      "name": "Countries (multi-language lexicon)",
+      "label": "Country in native spelling by dictionary"
+    },
+    "phone_be_national": {
+      "name": "Belgian phone by context",
+      "label": "Belgian phone number with label"
+    },
+    "address_be_street_context": {
+      "name": "BE/NL/EN address by label",
+      "label": "Postal address with label"
+    },
+    "greeting_name_context": {
+      "name": "Name after greeting",
+      "label": "Personal name detected after a greeting"
+    }
+  },
+  "tokenLabels": {
+    "NOMBRE": "First name",
+    "APELLIDO": "Last name",
+    "NOMBRE_COMPLETO": "Full name",
+    "PERSONA_ES": "Person (ES)",
+    "PERSONA_FR": "Person (FR)",
+    "PERSONNE_FR": "Person (FR)",
+    "PERSOON_NL": "Person (NL)",
+    "PERSON_EN": "Person (EN)",
+    "DNI": "National ID",
+    "DNI_ES": "Spanish ID",
+    "NIE": "Foreigner ID",
+    "NIE_ES": "Foreigner ID",
+    "PASAPORTE": "Passport",
+    "SSN_USA": "SSN (US)",
+    "RRN_BE": "National Register (BE)",
+    "FECHA_NACIMIENTO": "Date of birth",
+    "EDAD": "Age",
+    "SEXO": "Sex / gender",
+    "DIRECCION": "Address",
+    "CODIGO_POSTAL": "Postal code",
+    "CIUDAD": "City",
+    "PROVINCIA": "Province / region",
+    "PAIS": "Country",
+    "TELEFONO": "Phone",
+    "TELEFONO_INTL": "Phone",
+    "EMAIL": "Email",
+    "ESTADO_CIVIL": "Marital status",
+    "PROFESION": "Profession",
+    "NACIONALIDAD": "Nationality",
+    "EMPRESA": "Company",
+    "USUARIO": "User / login",
+    "MATRICULA": "Registration plate",
+    "EXPEDIENTE": "Case file",
+    "IBAN": "IBAN / bank account",
+    "BIC_SWIFT": "BIC / SWIFT",
+    "CUENTA": "Bank account",
+    "TARJETA_CREDITO": "Payment card",
+    "OTRO": "Other",
+    "RIESGO_MANUAL": "Manual risk",
+    "RIESGO_POSIBLE": "Possible risk"
+  }
+}
