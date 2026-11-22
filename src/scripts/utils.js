@@ -156,3 +156,26 @@ export const storage = {
 export function clamp(value, min, max) {
     return Math.max(min, Math.min(max, value));
 }
+
+/**
+ * Cleans and optimizes prompt formatting:
+ * - Strips zero-width and invisible Unicode characters (ZWSP, ZWNJ, BOM, etc.)
+ * - Normalizes non-breaking spaces (\u00A0) to standard spaces
+ * - Normalizes CRLF and CR to standard LF
+ * - Trims trailing whitespace from each line
+ * - Collapses 3+ consecutive linebreaks to 2
+ * - Trims leading and trailing whitespace
+ */
+export function cleanPromptFormatting(text) {
+    if (!text) return '';
+    return text
+        .replace(/[\u200B-\u200D\uFEFF]/g, '')
+        .replace(/\u00A0/g, ' ')
+        .replace(/\r\n/g, '\n')
+        .replace(/\r/g, '\n')
+        .split('\n')
+        .map(line => line.replace(/[ \t]+$/, ''))
+        .join('\n')
+        .replace(/\n{3,}/g, '\n\n')
+        .trim();
+}

@@ -267,7 +267,17 @@
     "toast_close": "Close notification",
     "theme_light": "Light theme active. Click for dark.",
     "theme_dark": "Dark theme active. Click for system.",
-    "theme_system": "Following system theme. Click for light."
+    "theme_system": "Following system theme. Click for light.",
+    "btn_clean_format": "Clean format",
+    "btn_clean_format_title": "Clean format (removes invisible spaces and empty lines)",
+    "toast_format_cleaned": "Prompt formatting optimized and cleaned.",
+    "toast_format_already_clean": "The prompt already has clean formatting.",
+    "btn_use_clean_input": "Load as input",
+    "toast_loaded_clean_input": "Clean prompt loaded into input area.",
+    "version_label": "Version",
+    "version_modal_title": "About this version",
+    "version_modal_status": "Status: Stable",
+    "version_modal_desc": "Educational sandbox for detecting and sanitizing sensitive data in AI prompts."
   },
   "patterns": {
     "email": {

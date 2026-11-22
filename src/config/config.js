@@ -3,7 +3,7 @@
  * All keys and limits are defined here to avoid magic strings/numbers.
  */
 export const CONFIG = Object.freeze({
-    VERSION: '2.1.0',
+    VERSION: '1.0.5.1',
 
     // localStorage keys
     STORAGE: {

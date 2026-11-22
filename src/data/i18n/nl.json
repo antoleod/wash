@@ -267,7 +267,17 @@
     "toast_close": "Melding sluiten",
     "theme_light": "Licht thema actief. Klik voor donker.",
     "theme_dark": "Donker thema actief. Klik voor systeem.",
-    "theme_system": "Volgt systeemthema. Klik voor licht."
+    "theme_system": "Volgt systeemthema. Klik voor licht.",
+    "btn_clean_format": "Indeling opschonen",
+    "btn_clean_format_title": "Indeling opschonen (verwijdert onzichtbare spaties en lege regels)",
+    "toast_format_cleaned": "Prompt-indeling geoptimaliseerd en opgeschoond.",
+    "toast_format_already_clean": "De prompt heeft al een schone indeling.",
+    "btn_use_clean_input": "Laden als invoer",
+    "toast_loaded_clean_input": "Schone prompt geladen in het invoergebied.",
+    "version_label": "Versie",
+    "version_modal_title": "Over deze versie",
+    "version_modal_status": "Status: Stabiel",
+    "version_modal_desc": "Educatieve sandbox voor het detecteren en opschonen van gevoelige gegevens in AI-prompts."
   },
   "patterns": {
     "email": {

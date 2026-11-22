@@ -267,7 +267,17 @@
     "toast_close": "Cerrar notificación",
     "theme_light": "Tema claro activo. Clic para oscuro.",
     "theme_dark": "Tema oscuro activo. Clic para sistema.",
-    "theme_system": "Siguiendo el sistema. Clic para claro."
+    "theme_system": "Siguiendo el sistema. Clic para claro.",
+    "btn_clean_format": "Limpiar formato",
+    "btn_clean_format_title": "Limpiar formato (elimina espacios invisibles y líneas vacías)",
+    "toast_format_cleaned": "Formato del prompt optimizado y limpiado.",
+    "toast_format_already_clean": "El prompt ya tiene un formato limpio.",
+    "btn_use_clean_input": "Cargar como entrada",
+    "toast_loaded_clean_input": "Prompt limpio cargado en el área de entrada.",
+    "version_label": "Versión",
+    "version_modal_title": "Acerca de la versión",
+    "version_modal_status": "Estado: Estable",
+    "version_modal_desc": "Sandbox educativo para la detección y sanitización de datos sensibles en prompts de IA."
   },
   "patterns": {
     "email": {

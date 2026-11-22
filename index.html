@@ -235,7 +235,12 @@
                     <svg class="icon icon-xl"><use href="#ic-washer"/></svg>
                 </span>
                 <div class="header-text">
-                    <h1 data-i18n="title">La Lavadora de Datos</h1>
+                    <div class="header-title-row">
+                        <h1 data-i18n="title">La Lavadora de Datos</h1>
+                        <button id="versionBadgeBtn" class="version-badge" type="button" aria-label="Ver versión V1.0.5.1" title="Ver información de versión">
+                            <span id="headerVersionTag">V1.0.5.1</span>
+                        </button>
+                    </div>
                     <span class="header-subtitle" data-i18n="header_subtitle">Anonimización inteligente de datos sensibles</span>
                 </div>
             </div>
@@ -282,6 +287,10 @@
             <span data-i18n="nav_config">Configuración</span>
         </a>
         <span class="sidebar-spacer"></span>
+        <div class="sidebar-version-wrap">
+            <span class="sidebar-version-label" data-i18n="version_label">Versión</span>
+            <span class="sidebar-version-tag" id="sidebarVersionTag">V1.0.5.1</span>
+        </div>
         <p class="sidebar-privacy" data-i18n="tokenmap_privacy">🔒 Todo se procesa localmente en tu navegador. Ningún valor sensible sale del dispositivo.</p>
     </aside>
 
@@ -374,6 +383,10 @@
                         <button class="btn btn-sm" id="pasteBtn" aria-label="Pegar desde el portapapeles" data-i18n-title="btn_paste" title="Pegar">
                             <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-paste"/></svg>
                             <span data-i18n="btn_paste">Pegar</span>
+                        </button>
+                        <button class="btn btn-sm" id="formatPromptBtn" type="button" aria-label="Limpiar formato" data-i18n-title="btn_clean_format_title" title="Limpiar formato (elimina espacios invisibles y líneas vacías)">
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-shield"/></svg>
+                            <span data-i18n="btn_clean_format">Limpiar formato</span>
                         </button>
                         <button class="btn btn-sm" id="importBtn" aria-label="Importar archivo de texto" title="Importar .txt / .csv (arrastrar también funciona)">
                             <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-import"/></svg>
@@ -478,6 +491,10 @@
                         <button class="btn btn-sm" id="copyBtn" aria-label="Copiar solo el prompt limpio" title="Copiar prompt limpio (Ctrl+Shift+C)" disabled>
                             <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-copy"/></svg>
                             <span data-i18n="btn_copy_prompt">Copiar prompt</span>
+                        </button>
+                        <button class="btn btn-sm btn-outline" id="useCleanInputBtn" type="button" aria-label="Cargar prompt limpio como entrada" title="Cargar prompt limpio en la entrada" disabled>
+                            <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-undo"/></svg>
+                            <span data-i18n="btn_use_clean_input">Cargar como entrada</span>
                         </button>
                         <button class="btn btn-sm" id="copyFullBtn" aria-label="Copiar el informe completo (auditoría y detalles)" title="Copiar informe completo" disabled>
                             <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-copy"/></svg>
@@ -935,6 +952,38 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+
+<!-- Version modal -->
+<div class="modal" id="versionModal" role="dialog" aria-modal="true" aria-labelledby="versionModalTitle" hidden>
+    <div class="modal-backdrop" id="versionBackdrop"></div>
+    <div class="modal-content">
+        <div class="modal-header">
+            <span class="modal-header-icon" aria-hidden="true">
+                <svg class="icon" aria-hidden="true"><use href="#ic-washer"/></svg>
+            </span>
+            <h2 id="versionModalTitle" data-i18n="version_modal_title">Acerca de la versión</h2>
+            <button class="btn btn-icon modal-close" id="closeVersionModalBtn" aria-label="Cerrar modal de versión">
+                <svg class="icon icon-sm" aria-hidden="true"><use href="#ic-close"/></svg>
+            </button>
+        </div>
+        <div class="modal-body version-modal-card">
+            <div class="version-modal-head">
+                <div>
+                    <strong>La Lavadora de Datos</strong>
+                    <div style="font-size:0.8rem;color:var(--color-text-muted)" data-i18n="version_modal_status">Estado: Estable</div>
+                </div>
+                <span class="version-pill-large" id="modalVersionValue">V1.0.5.1</span>
+            </div>
+            <p data-i18n="version_modal_desc">Sandbox educativo para la detección y sanitización de datos sensibles en prompts de IA.</p>
+            <ul class="version-feature-list">
+                <li><span>✨</span> <span><strong>Limpieza de formato:</strong> Eliminación de caracteres invisibles zero-width, normalización de saltos de línea y optimización para LLMs.</span></li>
+                <li><span>🛡️</span> <span><strong>Anonimización reversible:</strong> Sustitución consistente de PII/PCI por tokens locales en el navegador.</span></li>
+                <li><span>📊</span> <span><strong>Auditoría & Mapa de Tokens:</strong> Desglose en tiempo real y exportación en múltiples formatos.</span></li>
+                <li><span>🌓</span> <span><strong>Multi-tema & Mobile:</strong> Temas claro, oscuro, del sistema y barra de navegación responsive.</span></li>
+            </ul>
         </div>
     </div>
 </div>

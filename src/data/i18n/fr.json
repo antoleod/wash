@@ -267,7 +267,17 @@
     "toast_close": "Fermer la notification",
     "theme_light": "Thème clair actif. Cliquer pour le thème sombre.",
     "theme_dark": "Thème sombre actif. Cliquer pour le système.",
-    "theme_system": "Suit le thème du système. Cliquer pour clair."
+    "theme_system": "Suit le thème du système. Cliquer pour clair.",
+    "btn_clean_format": "Nettoyer le format",
+    "btn_clean_format_title": "Nettoyer le format (supprime les espaces invisibles et les lignes vides)",
+    "toast_format_cleaned": "Format du prompt optimisé et nettoyé.",
+    "toast_format_already_clean": "Le prompt a déjà un format propre.",
+    "btn_use_clean_input": "Charger comme entrée",
+    "toast_loaded_clean_input": "Prompt propre chargé dans la zone d'entrée.",
+    "version_label": "Version",
+    "version_modal_title": "À propos de cette version",
+    "version_modal_status": "Statut : Stable",
+    "version_modal_desc": "Bac à sable éducatif pour détecter et assainir les données sensibles dans les invites d'IA."
   },
   "patterns": {
     "email": {

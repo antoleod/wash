@@ -16,7 +16,7 @@ import { buildAnonymizationReport } from './report.js';
 import { suggestExpansion, suggestTokenBase, normalizeTokenBase, generalizeToRegex, CORRECTION_ACTIONS } from './corrections.js';
 import { MANUAL_TOKEN_OPTIONS, labelForBase, PCI_TOKEN_BASES } from './labels.js';
 import { restore, findPlaceholders } from './privacy.js';
-import { downloadTextFile, readFileAsText, storage, debounce, timestamp } from './utils.js';
+import { downloadTextFile, readFileAsText, storage, debounce, timestamp, cleanPromptFormatting } from './utils.js';
 import {
     initTheme, toggleTheme,
     openModal, closeModal,
@@ -438,6 +438,35 @@ function handleExport() {
     const filename = `prompt-sanitizado-${date}.txt`;
     downloadTextFile(filename, state.lastSanitized);
     showToast(t('toast_exported', { filename }), 'success');
+}
+
+function handleFormatPrompt() {
+    const text = getInput();
+    if (!text.trim()) {
+        showToast(t('toast_no_input'), 'warning');
+        return;
+    }
+    const cleaned = cleanPromptFormatting(text);
+    if (cleaned === text) {
+        showToast(t('toast_format_already_clean'), 'info');
+        return;
+    }
+    state.undoSnapshot = text;
+    setUndoEnabled(true);
+    setInput(cleaned);
+    showToast(t('toast_format_cleaned'), 'success');
+}
+
+function handleUseCleanAsInput() {
+    if (!state.cleanText) {
+        showToast(t('toast_no_tokens_export'), 'warning');
+        return;
+    }
+    state.undoSnapshot = getInput();
+    setUndoEnabled(true);
+    setInput(state.cleanText);
+    switchToInputTab();
+    showToast(t('toast_loaded_clean_input'), 'success');
 }
 
 // ── Privacy Gateway: reverse anonymization ──────────────────
@@ -1407,6 +1436,7 @@ function renderLanguageSelector() {
             refreshPatternList(); // pattern names need re-render after lang switch
             showToast(t('toast_lang_changed'), 'info');
             renderLanguageSelector(); // update active state
+            renderVersion();
         });
 
         container.appendChild(btn);
@@ -1458,6 +1488,8 @@ function bindEvents() {
     on('copyBtn',     'click', handleCopy);
     on('copyFullBtn', 'click', handleCopyFull);
     on('exportBtn',   'click', handleExport);
+    on('formatPromptBtn', 'click', handleFormatPrompt);
+    on('useCleanInputBtn', 'click', handleUseCleanAsInput);
 
     bindQuickActions();
 
@@ -1472,6 +1504,11 @@ function bindEvents() {
     on('helpBtn',       'click', () => openModal('shortcutsModal'));
     on('closeModalBtn', 'click', () => closeModal('shortcutsModal'));
     on('modalBackdrop', 'click', () => closeModal('shortcutsModal'));
+
+    // Version modal
+    on('versionBadgeBtn',      'click', () => openModal('versionModal'));
+    on('closeVersionModalBtn',  'click', () => closeModal('versionModal'));
+    on('versionBackdrop',       'click', () => closeModal('versionModal'));
 
     // Paste from clipboard
     on('pasteBtn', 'click', handlePaste);
@@ -1742,6 +1779,14 @@ function switchToOutputTab() {
     }
 }
 
+function switchToInputTab() {
+    const tabInput = document.getElementById('tabInput');
+    // Only switch when in mobile tab mode (tab is visible)
+    if (tabInput && getComputedStyle(tabInput).display !== 'none') {
+        tabInput.click();
+    }
+}
+
 // ── Pattern search ───────────────────────────────────────────
 
 function initPatternSearch() {
@@ -1818,8 +1863,15 @@ function pulseSanitizeBtn() {
 // ── Utilities ───────────────────────────────────────────────
 
 function renderVersion() {
+    const versionStr = `V${CONFIG.VERSION}`;
     const el = document.getElementById('versionTag');
-    if (el) el.textContent = `v${CONFIG.VERSION}`;
+    if (el) el.textContent = `${t('version_label')} ${versionStr}`;
+    const headerEl = document.getElementById('headerVersionTag');
+    if (headerEl) headerEl.textContent = versionStr;
+    const sidebarEl = document.getElementById('sidebarVersionTag');
+    if (sidebarEl) sidebarEl.textContent = versionStr;
+    const modalVer = document.getElementById('modalVersionValue');
+    if (modalVer) modalVer.textContent = versionStr;
 }
 
 function on(id, event, handler) {

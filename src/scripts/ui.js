@@ -452,7 +452,7 @@ function getEmptyStateDom() {
 }
 
 export function setOutputButtonsEnabled(enabled) {
-    ['copyBtn', 'copyFullBtn', 'exportBtn'].forEach(id => {
+    ['copyBtn', 'copyFullBtn', 'exportBtn', 'useCleanInputBtn'].forEach(id => {
         const btn = document.getElementById(id);
         if (btn) btn.disabled = !enabled;
     });
