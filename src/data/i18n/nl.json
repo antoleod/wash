@@ -258,7 +258,16 @@
     "toast_no_custom_patterns": "Geen aangepaste patronen om te delen.",
     "toast_pack_invalid": "Kon het pakket niet lezen (ongeldige JSON).",
     "toast_pack_imported": "Pakket geïmporteerd: {added} toegevoegd, {skipped} overgeslagen.",
-    "toast_pack_exported": "Pakket geëxporteerd ({n} patronen, geen persoonsgegevens)."
+    "toast_pack_exported": "Pakket geëxporteerd ({n} patronen, geen persoonsgegevens).",
+    "btn_export_menu": "Exporteren",
+    "tip_paste": "Plak of typ tekst met gevoelige gegevens",
+    "tip_audit": "Auditen detecteert en markeert risico's in realtime",
+    "tip_sanitize": "Sanitize vervangt gegevens door omkeerbare tokens",
+    "words_count": "woorden",
+    "toast_close": "Melding sluiten",
+    "theme_light": "Licht thema actief. Klik voor donker.",
+    "theme_dark": "Donker thema actief. Klik voor systeem.",
+    "theme_system": "Volgt systeemthema. Klik voor licht."
   },
   "patterns": {
     "email": {

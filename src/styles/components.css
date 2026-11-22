@@ -186,7 +186,13 @@ kbd {
     padding: 14px 16px;
     box-shadow: var(--shadow-sm);
     border: 1px solid var(--color-border);
-    animation: fadeIn 0.3s ease;
+    animation: slideDown 0.25s ease;
+    transform-origin: top;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .stats-grid {
@@ -377,6 +383,12 @@ kbd {
     border-radius: 12px;
     box-shadow: var(--shadow-lg);
     padding: 16px;
+    animation: popoverIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popoverIn {
+    from { opacity: 0; transform: translateY(6px) scale(0.97); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
 }
 .correction-form { display: grid; gap: 12px; }
 
@@ -567,6 +579,51 @@ kbd {
 }
 .tm-act-btn:hover { background: var(--bg-surface-alt); color: var(--color-text); }
 .tm-act-del:hover { color: var(--color-danger); border-color: var(--color-danger); }
+
+.tm-act-btn:focus-visible,
+.mem-act-btn:focus-visible,
+.btn-remove-pattern:focus-visible,
+.corr-close:focus-visible,
+.toast-close-btn:focus-visible {
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+}
+
+@media (max-width: 720px) {
+    .tokenmap-table thead { display: none; }
+    .tokenmap-table, .tokenmap-table tbody, .tokenmap-table tr, .tokenmap-table td {
+        display: block;
+        width: 100%;
+    }
+    .tokenmap-table tr {
+        margin-bottom: 10px;
+        background: var(--bg-surface-alt);
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: 8px 10px;
+    }
+    .tokenmap-table td {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 4px 0;
+        border-bottom: 1px solid color-mix(in srgb, var(--color-border) 50%, transparent);
+    }
+    .tokenmap-table td:last-child {
+        border-bottom: none;
+        padding-top: 6px;
+        justify-content: flex-end;
+    }
+    .tokenmap-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        color: var(--color-text-muted);
+        letter-spacing: 0.04em;
+    }
+}
 .tokenmap-empty {
     padding: 18px;
     text-align: center;
@@ -1346,17 +1403,49 @@ details[open] .patterns-summary > span:first-child::before {
 .toast {
     background: var(--color-heading);
     color: #fff;
-    padding: 11px 16px;
+    padding: 10px 14px;
     border-radius: var(--radius-md);
     font-size: 0.86rem;
     box-shadow: var(--shadow-lg);
     pointer-events: auto;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
     border-left: 4px solid transparent;
-    animation: toastIn 0.28s ease, toastOut 0.28s ease 2.72s forwards;
+    animation: toastIn 0.28s ease;
     line-height: 1.4;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast.toast-hiding {
+    opacity: 0;
+    transform: translateX(110%);
+}
+
+.toast-msg {
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+}
+
+.toast-close-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: inherit;
+    opacity: 0.7;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 1.15rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: opacity 0.15s ease, background-color 0.15s ease;
+}
+
+.toast-close-btn:hover {
+    opacity: 1;
+    background: rgba(255, 255, 255, 0.15);
 }
 
 .toast-success { border-left-color: var(--color-success); }
@@ -2008,9 +2097,95 @@ details[open] .patterns-summary > span:first-child::before {
 .result-empty-state p {
     font-size: 0.88rem;
     font-style: italic;
-    max-width: 220px;
+    max-width: 280px;
     line-height: 1.5;
     margin: 0;
+}
+
+.onboarding-tips {
+    list-style: none;
+    padding: 0;
+    margin: 4px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    font-size: 0.82rem;
+    color: var(--color-text-secondary);
+    max-width: 320px;
+    width: 100%;
+}
+
+.onboarding-tips li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg-surface-alt);
+    border: 1px solid var(--color-border);
+    padding: 6px 12px;
+    border-radius: var(--radius-md);
+    line-height: 1.35;
+}
+
+/* ============================================================
+   EXPORT DROPDOWN MENU
+   ============================================================ */
+.export-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.export-menu {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 4px);
+    background: var(--bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    min-width: 210px;
+    z-index: 250;
+    overflow: hidden;
+    padding: 4px 0;
+    list-style: none;
+    margin: 0;
+    animation: slideDown 0.15s ease;
+}
+
+.export-menu[hidden] {
+    display: none !important;
+}
+
+.export-menu li {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.export-menu button {
+    width: 100%;
+    text-align: left;
+    padding: 8px 14px;
+    font-size: 0.84rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color var(--transition);
+}
+
+.export-menu button:hover {
+    background: var(--bg-surface-alt);
+    color: var(--color-primary);
+}
+
+.export-menu button:focus-visible {
+    background: var(--bg-surface-alt);
+    outline: 2px solid var(--color-border-focus);
+    outline-offset: -2px;
 }
 
 

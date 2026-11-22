@@ -29,6 +29,7 @@
 
     --color-border:         #e4e4e7;
     --color-border-focus:   #2563eb;
+    --risk-none:            var(--color-border);
 
     --pii-bg:               #fef2f2;
     --pii-text:             #b91c1c;
@@ -74,6 +75,7 @@
 
     --color-border:         #3f3f46;
     --color-border-focus:   #3b82f6;
+    --risk-none:            #52525b;
 
     --pii-bg:               #2d1517;
     --pii-text:             #fca5a5;

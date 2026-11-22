@@ -1507,6 +1507,40 @@ function bindEvents() {
     on('exportMemoryBtn',    'click', handleExportMemory);
     on('exportProtectedBtn', 'click', handleExportProtected);
 
+    // Export dropdown menu toggle & auto-dismiss
+    const exportMenuBtn = document.getElementById('exportMenuBtn');
+    const exportMenu    = document.getElementById('exportMenu');
+    if (exportMenuBtn && exportMenu) {
+        exportMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isHidden = exportMenu.hidden;
+            exportMenu.hidden = !isHidden;
+            exportMenuBtn.setAttribute('aria-expanded', String(isHidden));
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!exportMenu.hidden && !exportMenu.contains(e.target) && e.target !== exportMenuBtn) {
+                exportMenu.hidden = true;
+                exportMenuBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !exportMenu.hidden) {
+                exportMenu.hidden = true;
+                exportMenuBtn.setAttribute('aria-expanded', 'false');
+                exportMenuBtn.focus();
+            }
+        });
+
+        exportMenu.querySelectorAll('button').forEach(btn => {
+            btn.addEventListener('click', () => {
+                exportMenu.hidden = true;
+                exportMenuBtn.setAttribute('aria-expanded', 'false');
+            });
+        });
+    }
+
     // Rule packs (export current patterns / import a shared pack)
     on('exportPackBtn', 'click', handleExportPack);
     on('importPackBtn', 'click', () => document.getElementById('packFileInput')?.click());
@@ -1617,7 +1651,10 @@ function meanConfidence(rows) {
 let _navPairs = [];
 
 function initSidebar() {
-    const items = Array.from(document.querySelectorAll('.app-sidebar .nav-item'));
+    const sidebarItems = Array.from(document.querySelectorAll('.app-sidebar .nav-item'));
+    const bottomItems  = Array.from(document.querySelectorAll('.mobile-bottom-nav a'));
+    const items = [...sidebarItems, ...bottomItems];
+
     _navPairs = items
         .map(el => ({ el, target: document.getElementById((el.getAttribute('href') || '').replace(/^#/, '')) }))
         .filter(p => p.target);
@@ -1641,10 +1678,16 @@ function initSidebar() {
             const top = entries.filter(en => en.isIntersecting)
                 .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
             if (!top) return;
-            const pair = _navPairs.find(p => p.target === top.target);
-            if (pair && !pair.el.classList.contains('nav-disabled')) setActiveNav(pair.el);
+            const targetId = top.target.id;
+            for (const { el, target } of _navPairs) {
+                const isMatch = target.id === targetId;
+                if (!el.classList.contains('nav-disabled')) {
+                    el.classList.toggle('nav-active', isMatch);
+                }
+            }
         }, { rootMargin: '-140px 0px -55% 0px', threshold: 0 });
-        for (const { target } of _navPairs) spy.observe(target);
+        const observedTargets = new Set(_navPairs.map(p => p.target));
+        for (const target of observedTargets) spy.observe(target);
     }
 }
 
@@ -1659,7 +1702,10 @@ function syncSidebarAvailability() {
 }
 
 function setActiveNav(activeEl) {
-    for (const { el } of _navPairs) el.classList.toggle('nav-active', el === activeEl);
+    const targetHref = activeEl.getAttribute('href');
+    for (const { el } of _navPairs) {
+        el.classList.toggle('nav-active', el.getAttribute('href') === targetHref);
+    }
 }
 
 // ── Mobile tabs ──────────────────────────────────────────────

@@ -258,7 +258,16 @@
     "toast_no_custom_patterns": "No custom patterns to share.",
     "toast_pack_invalid": "Could not read the pack (invalid JSON).",
     "toast_pack_imported": "Pack imported: {added} added, {skipped} skipped.",
-    "toast_pack_exported": "Pack exported ({n} patterns, no personal data)."
+    "toast_pack_exported": "Pack exported ({n} patterns, no personal data).",
+    "btn_export_menu": "Export",
+    "tip_paste": "Paste or type text with sensitive data",
+    "tip_audit": "Audit detects and highlights risks in real time",
+    "tip_sanitize": "Sanitize replaces data with reversible tokens",
+    "words_count": "words",
+    "toast_close": "Close notification",
+    "theme_light": "Light theme active. Click for dark.",
+    "theme_dark": "Dark theme active. Click for system.",
+    "theme_system": "Following system theme. Click for light."
   },
   "patterns": {
     "email": {

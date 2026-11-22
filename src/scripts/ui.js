@@ -18,13 +18,25 @@ const prefersReducedMotion = () =>
 // ============================================================
 
 export function initTheme() {
-    const saved = storage.get(CONFIG.STORAGE.THEME) || 'light';
+    const saved = storage.get(CONFIG.STORAGE.THEME) || 'system';
     applyTheme(saved, false);
+
+    // When set to 'system', track system dark/light changes
+    window.matchMedia?.('(prefers-color-scheme: dark)').addEventListener?.('change', () => {
+        if ((storage.get(CONFIG.STORAGE.THEME) || 'system') === 'system') {
+            applyTheme('system', false);
+        }
+    });
+}
+
+function resolveTheme(theme) {
+    if (theme === 'dark' || theme === 'light') return theme;
+    return window.matchMedia?.('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
 export function toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme') || 'light';
-    const next    = current === 'light' ? 'dark' : 'light';
+    const current = storage.get(CONFIG.STORAGE.THEME) || 'system';
+    const next    = current === 'light' ? 'dark' : current === 'dark' ? 'system' : 'light';
     applyTheme(next, true);
     return next;
 }
@@ -34,7 +46,8 @@ function applyTheme(theme, animate) {
         document.body.classList.add('no-transition');
     }
 
-    document.documentElement.setAttribute('data-theme', theme);
+    const effective = resolveTheme(theme);
+    document.documentElement.setAttribute('data-theme', effective);
     storage.set(CONFIG.STORAGE.THEME, theme);
 
     // Swap SVG icon (moon ↔ sun) with a brief spin animation
@@ -42,13 +55,21 @@ function applyTheme(theme, animate) {
     if (iconEl) {
         const use = iconEl.querySelector('use');
         if (use) {
-            use.setAttribute('href', theme === 'dark' ? '#ic-sun' : '#ic-moon');
+            use.setAttribute('href', effective === 'dark' ? '#ic-sun' : '#ic-moon');
         }
         if (animate) {
             iconEl.classList.remove('theme-spin');
             void iconEl.offsetWidth; // reflow to restart animation
             iconEl.classList.add('theme-spin');
         }
+    }
+
+    const btn = document.getElementById('themeToggle');
+    if (btn) {
+        const labelKey = `theme_${theme}`;
+        const label = t(labelKey);
+        btn.setAttribute('aria-label', label);
+        btn.setAttribute('title', `${label} (Ctrl+D)`);
     }
 
     if (!animate) {
@@ -122,14 +143,31 @@ export function showToast(message, type = 'info') {
     const config  = TOAST_TYPES[type] || TOAST_TYPES.info;
     const toast   = document.createElement('div');
     toast.className = `toast ${config.class}`;
-    toast.innerHTML = `<span class="toast-icon" aria-hidden="true">${config.icon}</span><span>${message}</span>`;
+    toast.setAttribute('role', type === 'error' ? 'alert' : 'status');
+
+    toast.innerHTML = `
+        <span class="toast-icon" aria-hidden="true">${config.icon}</span>
+        <span class="toast-msg">${message}</span>
+        <button class="toast-close-btn" type="button" aria-label="${escapeHtml(t('toast_close'))}">&times;</button>
+    `;
 
     container.appendChild(toast);
 
-    // Remove after animation completes
-    setTimeout(() => {
-        toast.remove();
-    }, CONFIG.TOAST_DURATION_MS + 300);
+    let dismissed = false;
+    const closeToast = () => {
+        if (dismissed) return;
+        dismissed = true;
+        toast.classList.add('toast-hiding');
+        setTimeout(() => toast.remove(), 250);
+    };
+
+    const duration = type === 'error' ? CONFIG.TOAST_DURATION_MS * 1.8 : CONFIG.TOAST_DURATION_MS;
+    const timer = setTimeout(closeToast, duration);
+
+    toast.querySelector('.toast-close-btn')?.addEventListener('click', () => {
+        clearTimeout(timer);
+        closeToast();
+    });
 }
 
 // ============================================================
@@ -147,7 +185,7 @@ const RISK_CSS = {
 
 const RISK_METER_WIDTHS = { none: 0, low: 22, medium: 58, high: 94 };
 const RISK_METER_COLORS = {
-    none:   'var(--color-border)',
+    none:   'var(--risk-none, var(--color-border))',
     low:    'var(--color-success)',
     medium: 'var(--color-warning)',
     high:   'var(--color-danger)',
@@ -405,6 +443,11 @@ function getEmptyStateDom() {
     return `<div class="result-empty-state">
         <svg class="icon icon-xl empty-icon" aria-hidden="true"><use href="#ic-shield"/></svg>
         <p>${escapeHtml(t('result_placeholder'))}</p>
+        <ul class="onboarding-tips" aria-label="Consejos de uso">
+            <li><span>✍️</span> <span>${escapeHtml(t('tip_paste'))}</span></li>
+            <li><span>🔍</span> <span>${escapeHtml(t('tip_audit'))}</span></li>
+            <li><span>🛡️</span> <span>${escapeHtml(t('tip_sanitize'))}</span></li>
+        </ul>
     </div>`;
 }
 
@@ -461,6 +504,8 @@ export function initFindingsNav() {
 export function hideFindingsNav() {
     const bar = document.getElementById('findingsNav');
     if (bar) bar.hidden = true;
+    const counter = document.getElementById('findingsCounter');
+    if (counter) counter.textContent = '';
     _findings   = [];
     _findingIdx = -1;
 }
@@ -491,7 +536,13 @@ export function updateCharCount(text) {
     const el = document.getElementById('charCount');
     if (!el) return;
     const len = text.length;
-    el.textContent = len === 0 ? '0 chars' : `${len.toLocaleString('es-ES')} chars`;
+    if (len === 0) {
+        el.textContent = '0 chars';
+        return;
+    }
+    const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+    const wordsLabel = t('words_count');
+    el.textContent = `${len.toLocaleString('es-ES')} chars · ${words.toLocaleString('es-ES')} ${wordsLabel}`;
 }
 
 // ============================================================
@@ -530,12 +581,12 @@ export function renderTokenMap(rows, handlers = {}) {
         const srcClass  = isManual ? 'tm-source-manual' : 'tm-source-auto';
 
         tr.innerHTML = `
-            <td class="tm-token">${escapeHtml(row.token)}</td>
-            <td>${escapeHtml(row.base ? labelForBase(row.base) : row.type)}</td>
-            <td class="tm-value">${escapeHtml(row.value)}</td>
-            <td><span class="tm-badge ${riskClass}">${escapeHtml(riskKey)}</span></td>
-            <td><span class="tm-badge ${srcClass}">${escapeHtml(conf)}</span></td>
-            <td><div class="tm-actions">
+            <td class="tm-token" data-label="${escapeHtml(t('tm_token'))}">${escapeHtml(row.token)}</td>
+            <td data-label="${escapeHtml(t('tm_type'))}">${escapeHtml(row.base ? labelForBase(row.base) : row.type)}</td>
+            <td class="tm-value" data-label="${escapeHtml(t('tm_value'))}">${escapeHtml(row.value)}</td>
+            <td data-label="${escapeHtml(t('tm_risk'))}"><span class="tm-badge ${riskClass}">${escapeHtml(riskKey)}</span></td>
+            <td data-label="${escapeHtml(t('tm_confidence'))}"><span class="tm-badge ${srcClass}">${escapeHtml(conf)}</span></td>
+            <td data-label="${escapeHtml(t('tm_actions'))}"><div class="tm-actions">
                 <button class="tm-act-btn tm-act-edit" type="button">${escapeHtml(t('action_edit'))}</button>
                 <button class="tm-act-btn tm-act-rep" type="button">${escapeHtml(t('action_replace'))}</button>
                 <button class="tm-act-btn tm-act-del" type="button">${escapeHtml(t('action_delete'))}</button>

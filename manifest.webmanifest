@@ -1,0 +1,21 @@
+{
+  "name": "La Lavadora de Datos",
+  "short_name": "Lavadora DLP",
+  "description": "Simulador DLP educativo para detección y sanitización de datos sensibles en prompts de IA",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "theme_color": "#2563eb",
+  "background_color": "#ffffff",
+  "lang": "es",
+  "icons": [
+    {
+      "src": "src/assets/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity", "utilities"]
+}
